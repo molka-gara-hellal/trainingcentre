@@ -1,0 +1,547 @@
+// Schéma de base de données — centre de formation informatique (Monastir)
+// Règle projet : aucune donnée métier inventée.
+//  - Prix / niveau / durée / dates / capacité inconnus => colonnes NULLABLES (affichées "À définir").
+//  - Coordonnées du centre => table SiteSetting (status = TODO tant que non renseigné).
+
+generator client {
+  provider     = "prisma-client"
+  output       = "../src/generated/prisma"
+  moduleFormat = "esm"
+}
+
+datasource db {
+  provider = "postgresql"
+  // Prisma 7 : l'URL de connexion est dans prisma.config.ts (variable DATABASE_URL)
+}
+
+// ============================================================
+// ENUMS
+// ============================================================
+
+enum Role {
+  STUDENT
+  TRAINER
+  ADMIN
+}
+
+enum UserStatus {
+  PENDING_ACTIVATION // compte créé à l'acceptation d'une inscription, mot de passe pas encore défini
+  ACTIVE
+  SUSPENDED
+}
+
+enum Locale {
+  FR
+  AR
+  EN
+}
+
+enum CourseLevel {
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+}
+
+enum CourseStatus {
+  DRAFT
+  PUBLISHED
+  DISABLED
+}
+
+enum SessionStatus {
+  PLANNED
+  OPEN
+  FULL
+  ONGOING
+  COMPLETED
+  CANCELLED
+}
+
+enum RegistrationStatus {
+  PENDING
+  ACCEPTED
+  REJECTED
+  WAITLIST
+}
+
+enum EnrollmentStatus {
+  ACTIVE
+  COMPLETED
+  DROPPED
+}
+
+enum PaymentStatus {
+  UNPAID
+  PARTIAL
+  PAID
+  REFUNDED
+}
+
+enum PaymentMethod {
+  CASH
+  BANK_TRANSFER
+  OTHER
+}
+
+enum AttendanceStatus {
+  PRESENT
+  ABSENT
+  LATE
+  EXCUSED
+}
+
+enum ProjectStatus {
+  NOT_STARTED
+  IN_PROGRESS
+  SUBMITTED
+  REVIEWED
+  VALIDATED
+}
+
+/// Uniquement des attestations émises par le centre.
+/// Une certification tierce ne sera ajoutée qu'après confirmation officielle du partenariat.
+enum CertificateType {
+  ATTESTATION
+}
+
+enum NotificationType {
+  NEW_REGISTRATION
+  REGISTRATION_DECISION
+  NEW_PFE_REQUEST
+  NEW_CONTACT_MESSAGE
+  PAYMENT_UPDATE
+  PROJECT_REVIEWED
+  CERTIFICATE_ISSUED
+  SYSTEM
+  /// Un étudiant a rendu un projet : notification du formateur de la session
+  PROJECT_SUBMITTED
+}
+
+enum InboxStatus {
+  NEW
+  IN_REVIEW
+  CLOSED
+}
+
+enum SettingStatus {
+  TODO
+  SET
+}
+
+// ============================================================
+// UTILISATEURS & AUTH
+// ============================================================
+
+model User {
+  id           String     @id @default(uuid(7)) @db.Uuid
+  email        String     @unique
+  /// null tant que le compte n'est pas activé. Hash argon2id, jamais de mot de passe en clair.
+  passwordHash String?
+  role         Role
+  status       UserStatus @default(PENDING_ACTIVATION)
+  locale       Locale     @default(FR)
+  firstName    String
+  lastName     String
+  lastLoginAt  DateTime?
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  /// Suppression douce : on conserve l'historique (paiements, présences...)
+  deletedAt    DateTime?
+
+  student             Student?
+  trainer             Trainer?
+  refreshTokens       RefreshToken[]
+  passwordResetTokens PasswordResetToken[]
+  notifications       Notification[]
+  auditLogs           AuditLog[]
+
+  @@index([role, status])
+}
+
+model Student {
+  id            String  @id @default(uuid(7)) @db.Uuid
+  userId        String  @unique @db.Uuid
+  phone         String?
+  age           Int?
+  educationLevel String?
+  institution   String?
+  hasOwnLaptop  Boolean @default(false)
+
+  user          User           @relation(fields: [userId], references: [id], onDelete: Restrict)
+  enrollments   Enrollment[]
+  registrations Registration[]
+}
+
+model Trainer {
+  id          String   @id @default(uuid(7)) @db.Uuid
+  userId      String   @unique @db.Uuid
+  /// TODO tant que la biographie n'est pas fournie : ne rien inventer
+  bio         String?
+  specialties String[]
+
+  user     User            @relation(fields: [userId], references: [id], onDelete: Restrict)
+  sessions CourseSession[]
+}
+
+model RefreshToken {
+  id        String    @id @default(uuid(7)) @db.Uuid
+  userId    String    @db.Uuid
+  /// Famille de rotation : si un token déjà utilisé est rejoué, toute la famille est révoquée
+  familyId  String    @db.Uuid
+  /// Hash SHA-256 du token. Le token brut n'est jamais stocké.
+  tokenHash String    @unique
+  expiresAt DateTime
+  revokedAt DateTime?
+  createdAt DateTime  @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([familyId])
+}
+
+model PasswordResetToken {
+  id        String    @id @default(uuid(7)) @db.Uuid
+  userId    String    @db.Uuid
+  tokenHash String    @unique
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime  @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+// ============================================================
+// CATALOGUE
+// ============================================================
+
+model CourseCategory {
+  id        String @id @default(uuid(7)) @db.Uuid
+  slug      String @unique
+  sortOrder Int    @default(0)
+
+  translations CourseCategoryTranslation[]
+  courses      Course[]
+}
+
+model CourseCategoryTranslation {
+  id         String @id @default(uuid(7)) @db.Uuid
+  categoryId String @db.Uuid
+  locale     Locale
+  name       String
+
+  category CourseCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@unique([categoryId, locale])
+}
+
+/// Fiche catalogue (contenu pédagogique). Les groupes concrets sont des CourseSession.
+model Course {
+  id            String       @id @default(uuid(7)) @db.Uuid
+  slug          String       @unique
+  categoryId    String       @db.Uuid
+  /// null = "À définir"
+  level         CourseLevel?
+  durationHours Int?
+  sessionsCount Int?
+  /// En dinars tunisiens (3 décimales). null = "À définir". Jamais de faux prix.
+  priceTnd      Decimal?     @db.Decimal(10, 3)
+  status        CourseStatus @default(DRAFT)
+  sortOrder     Int          @default(0)
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+  deletedAt     DateTime?
+
+  category      CourseCategory      @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  translations  CourseTranslation[]
+  sessions      CourseSession[]
+  registrations Registration[]
+
+  @@index([status, categoryId])
+}
+
+model CourseTranslation {
+  id            String  @id @default(uuid(7)) @db.Uuid
+  courseId      String  @db.Uuid
+  locale        Locale
+  title         String
+  summary       String?
+  description   String?
+  objectives    String[]
+  prerequisites String[]
+  skills        String[]
+  finalProject  String?
+  /// Programme détaillé : [{ "title": "...", "topics": ["...", "..."] }]. Validé par Zod côté API.
+  program       Json?
+
+  course Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  @@unique([courseId, locale])
+}
+
+model Room {
+  id       String @id @default(uuid(7)) @db.Uuid
+  name     String @unique
+  capacity Int
+
+  sessions       CourseSession[]
+  scheduleEvents ScheduleEvent[]
+}
+
+/// Un groupe concret : dates, horaires, salle, capacité, formateur.
+model CourseSession {
+  id           String        @id @default(uuid(7)) @db.Uuid
+  courseId     String        @db.Uuid
+  trainerId    String?       @db.Uuid
+  roomId       String?       @db.Uuid
+  /// Libellé affiché (ex. "Groupe 1"). Défini par l'admin.
+  label        String?
+  startDate    DateTime?     @db.Date
+  endDate      DateTime?     @db.Date
+  /// Texte libre d'horaires pour l'affichage public. null = "À définir".
+  scheduleNote String?
+  /// null = "À définir"
+  capacity     Int?
+  status       SessionStatus @default(PLANNED)
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+
+  course         Course          @relation(fields: [courseId], references: [id], onDelete: Restrict)
+  trainer        Trainer?        @relation(fields: [trainerId], references: [id], onDelete: SetNull)
+  room           Room?           @relation(fields: [roomId], references: [id], onDelete: SetNull)
+  scheduleEvents ScheduleEvent[]
+  enrollments    Enrollment[]
+  registrations  Registration[]
+
+  @@index([courseId, status])
+  @@index([startDate])
+}
+
+/// Séance datée (sert au calendrier, à la présence et à la détection de conflits de salle)
+model ScheduleEvent {
+  id        String   @id @default(uuid(7)) @db.Uuid
+  sessionId String   @db.Uuid
+  roomId    String?  @db.Uuid
+  startsAt  DateTime
+  endsAt    DateTime
+
+  session     CourseSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  room        Room?         @relation(fields: [roomId], references: [id], onDelete: SetNull)
+  attendances Attendance[]
+
+  @@index([sessionId, startsAt])
+  @@index([roomId, startsAt])
+}
+
+// ============================================================
+// INSCRIPTIONS & SUIVI
+// ============================================================
+
+/// Demande d'inscription faite depuis le formulaire public (sans compte requis).
+model Registration {
+  id             String             @id @default(uuid(7)) @db.Uuid
+  firstName      String
+  lastName       String
+  email          String
+  phone          String
+  age            Int
+  educationLevel String
+  institution    String?
+  courseId       String             @db.Uuid
+  sessionId      String?            @db.Uuid
+  /// Niveau informatique déclaré par le candidat
+  level          CourseLevel
+  hasOwnLaptop   Boolean
+  message        String?
+  locale         Locale             @default(FR)
+  /// Preuve du consentement (date/heure de la case cochée)
+  consentAt      DateTime
+  status         RegistrationStatus @default(PENDING)
+  adminNote      String?
+  decidedAt      DateTime?
+  /// Renseigné quand la demande est acceptée et qu'un compte étudiant est créé
+  studentId      String?            @db.Uuid
+  createdAt      DateTime           @default(now())
+  updatedAt      DateTime           @updatedAt
+
+  course     Course         @relation(fields: [courseId], references: [id], onDelete: Restrict)
+  session    CourseSession? @relation(fields: [sessionId], references: [id], onDelete: SetNull)
+  student    Student?       @relation(fields: [studentId], references: [id], onDelete: SetNull)
+  enrollment Enrollment?
+
+  @@index([status, createdAt])
+  @@index([email])
+  @@index([courseId])
+}
+
+/// Étudiant accepté dans une session. Créé quand l'admin accepte une Registration.
+model Enrollment {
+  id             String           @id @default(uuid(7)) @db.Uuid
+  studentId      String           @db.Uuid
+  sessionId      String           @db.Uuid
+  registrationId String?          @unique @db.Uuid
+  status         EnrollmentStatus @default(ACTIVE)
+  progressPct    Int              @default(0)
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+
+  student      Student       @relation(fields: [studentId], references: [id], onDelete: Restrict)
+  session      CourseSession @relation(fields: [sessionId], references: [id], onDelete: Restrict)
+  registration Registration? @relation(fields: [registrationId], references: [id], onDelete: SetNull)
+  payments     Payment[]
+  attendances  Attendance[]
+  projects     Project[]
+  certificates Certificate[]
+
+  @@unique([studentId, sessionId])
+  @@index([sessionId, status])
+}
+
+/// Une ligne = un versement. Paiement manuel (espèces/virement) au lancement.
+model Payment {
+  id           String         @id @default(uuid(7)) @db.Uuid
+  enrollmentId String         @db.Uuid
+  amount       Decimal        @db.Decimal(10, 3)
+  currency     String         @default("TND")
+  status       PaymentStatus  @default(UNPAID)
+  method       PaymentMethod?
+  reference    String?
+  note         String?
+  paidAt       DateTime?
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+
+  enrollment Enrollment @relation(fields: [enrollmentId], references: [id], onDelete: Restrict)
+
+  @@index([enrollmentId])
+  @@index([status])
+}
+
+model Attendance {
+  id              String           @id @default(uuid(7)) @db.Uuid
+  enrollmentId    String           @db.Uuid
+  scheduleEventId String           @db.Uuid
+  status          AttendanceStatus
+  note            String?
+
+  enrollment    Enrollment    @relation(fields: [enrollmentId], references: [id], onDelete: Cascade)
+  scheduleEvent ScheduleEvent @relation(fields: [scheduleEventId], references: [id], onDelete: Cascade)
+
+  @@unique([enrollmentId, scheduleEventId])
+}
+
+model Project {
+  id           String        @id @default(uuid(7)) @db.Uuid
+  enrollmentId String        @db.Uuid
+  title        String
+  description  String?
+  repoUrl      String?
+  status       ProjectStatus @default(NOT_STARTED)
+  feedback     String?
+  grade        Decimal?      @db.Decimal(4, 2)
+  submittedAt  DateTime?
+  reviewedAt   DateTime?
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+
+  enrollment Enrollment @relation(fields: [enrollmentId], references: [id], onDelete: Cascade)
+
+  @@index([enrollmentId])
+}
+
+model Certificate {
+  id           String          @id @default(uuid(7)) @db.Uuid
+  enrollmentId String          @db.Uuid
+  type         CertificateType @default(ATTESTATION)
+  /// Code unique de vérification (affiché sur le document)
+  code         String          @unique
+  issuedAt     DateTime        @default(now())
+
+  enrollment Enrollment @relation(fields: [enrollmentId], references: [id], onDelete: Restrict)
+
+  @@index([enrollmentId])
+}
+
+// ============================================================
+// COMMUNICATION
+// ============================================================
+
+model Notification {
+  id        String           @id @default(uuid(7)) @db.Uuid
+  /// Destinataire précis. null + audience = diffusion à tous les utilisateurs d'un rôle (ex. ADMIN).
+  userId    String?          @db.Uuid
+  audience  Role?
+  type      NotificationType
+  payload   Json             @default("{}")
+  readAt    DateTime?
+  createdAt DateTime         @default(now())
+
+  user User? @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, readAt])
+  @@index([audience, readAt])
+}
+
+model PfeRequest {
+  id        String      @id @default(uuid(7)) @db.Uuid
+  name      String
+  email     String
+  phone     String?
+  topic     String
+  message   String?
+  consentAt DateTime
+  status    InboxStatus @default(NEW)
+  createdAt DateTime    @default(now())
+
+  @@index([status, createdAt])
+}
+
+model ContactMessage {
+  id        String      @id @default(uuid(7)) @db.Uuid
+  name      String
+  email     String
+  subject   String
+  message   String
+  consentAt DateTime
+  status    InboxStatus @default(NEW)
+  createdAt DateTime    @default(now())
+
+  @@index([status, createdAt])
+}
+
+model Faq {
+  id        String  @id @default(uuid(7)) @db.Uuid
+  locale    Locale
+  question  String
+  answer    String
+  sortOrder Int     @default(0)
+  published Boolean @default(false)
+
+  @@index([locale, published, sortOrder])
+}
+
+/// Paramètres éditables depuis l'admin : coordonnées, réseaux sociaux, nom du centre...
+/// status = TODO tant que la valeur n'est pas confirmée ; le front affiche alors "À définir".
+model SiteSetting {
+  key       String        @id
+  value     String        @default("TODO")
+  status    SettingStatus @default(TODO)
+  updatedAt DateTime      @updatedAt
+}
+
+model AuditLog {
+  id        String   @id @default(uuid(7)) @db.Uuid
+  actorId   String?  @db.Uuid
+  action    String
+  entity    String
+  entityId  String?
+  metadata  Json?
+  createdAt DateTime @default(now())
+
+  actor User? @relation(fields: [actorId], references: [id], onDelete: SetNull)
+
+  @@index([entity, entityId])
+  @@index([actorId, createdAt])
+}

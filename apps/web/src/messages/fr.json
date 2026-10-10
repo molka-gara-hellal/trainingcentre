@@ -1,0 +1,982 @@
+{
+  "Meta": {
+    "title": "Centre de formation informatique à Monastir",
+    "siteShort": "Centre de formation informatique",
+    "description": "Formations informatiques pratiques à Monastir : de la théorie au portfolio, avec des projets concrets à chaque étape."
+  },
+  "Common": {
+    "todo": "À définir",
+    "required": "obligatoire",
+    "optional": "facultatif",
+    "sending": "Envoi en cours…",
+    "consent": "J'accepte que mes données soient utilisées pour traiter ma demande, conformément à la <link>politique de confidentialité</link>."
+  },
+  "Nav": {
+    "brandFallback": "Centre de formation informatique",
+    "courses": "Formations",
+    "pfe": "PFE",
+    "about": "À propos",
+    "contact": "Contact",
+    "login": "Connexion",
+    "register": "S'inscrire",
+    "logout": "Se déconnecter",
+    "mySpace": "Mon espace",
+    "menu": "Menu",
+    "close": "Fermer",
+    "main": "Navigation principale",
+    "mobile": "Navigation mobile",
+    "language": "Langue",
+    "skip": "Aller au contenu"
+  },
+  "Footer": {
+    "where": "Où nous trouver",
+    "address": "Adresse",
+    "hours": "Horaires",
+    "reach": "Nous joindre",
+    "phone": "Téléphone",
+    "email": "E-mail",
+    "writeUs": "Nous écrire",
+    "information": "Informations",
+    "legal": "Mentions légales",
+    "privacy": "Politique de confidentialité",
+    "about": "À propos",
+    "legalNav": "Informations légales",
+    "rights": "© {year} Centre de formation informatique, Monastir. Tous droits réservés.",
+    "location": "Monastir, Tunisie"
+  },
+  "Home": {
+    "title": "Apprendre l'informatique par la pratique",
+    "lead": "Un centre de formation à Monastir : de la théorie au portfolio, avec des projets concrets à chaque étape.",
+    "ctaCourses": "Découvrir les formations",
+    "ctaRegister": "S'inscrire",
+    "routeTitle": "Un parcours en cinq étapes",
+    "stages": [
+      {
+        "name": "Théorie",
+        "text": "Comprendre les bases avant d'écrire du code."
+      },
+      {
+        "name": "Pratique",
+        "text": "Appliquer chaque notion sur des exercices."
+      },
+      {
+        "name": "Projet",
+        "text": "Construire une application complète."
+      },
+      {
+        "name": "Portfolio",
+        "text": "Réunir ses réalisations pour les présenter."
+      },
+      {
+        "name": "Carrière",
+        "text": "Préparer un stage, un emploi ou la suite de ses études."
+      }
+    ],
+    "coursesTitle": "Les formations",
+    "allCourses": "Voir toutes les formations",
+    "coursesEmpty": "Les formations seront publiées prochainement. Écrivez-nous pour être informé de l'ouverture des inscriptions.",
+    "coursesUnavailable": "Le catalogue est momentanément indisponible. Réessayez dans quelques instants.",
+    "askUs": "Nous écrire",
+    "audiencesTitle": "Pour qui ?",
+    "audiences": [
+      {
+        "title": "Étudiants",
+        "text": "Consolider un cursus, préparer un projet ou apprendre un nouveau langage."
+      },
+      {
+        "title": "Jeunes professionnels",
+        "text": "Monter en compétences ou se tourner vers le numérique."
+      },
+      {
+        "title": "Étudiants en fin d'études",
+        "text": "Être accompagné dans le choix, la conception et la réalisation d'un projet de fin d'études (PFE)."
+      }
+    ],
+    "pfeLink": "Découvrir l'accompagnement PFE",
+    "faqTitle": "Questions fréquentes"
+  },
+  "Levels": {
+    "BEGINNER": "Débutant",
+    "INTERMEDIATE": "Intermédiaire",
+    "ADVANCED": "Avancé"
+  },
+  "SessionStatus": {
+    "PLANNED": "Planifiée",
+    "OPEN": "Inscriptions ouvertes",
+    "FULL": "Complète",
+    "ONGOING": "En cours",
+    "COMPLETED": "Terminée",
+    "CANCELLED": "Annulée"
+  },
+  "Courses": {
+    "title": "Nos formations",
+    "lead": "Choisissez une formation, consultez son programme et demandez votre inscription.",
+    "level": "Niveau",
+    "duration": "Durée",
+    "price": "Tarif",
+    "hours": "{count} h",
+    "categories": "Catégories",
+    "all": "Toutes",
+    "search": "Rechercher une formation",
+    "searchButton": "Rechercher",
+    "noResults": "Aucune formation ne correspond à votre recherche.",
+    "empty": "Aucune formation n'est publiée pour le moment. Elles seront ajoutées prochainement.",
+    "unavailable": "Le catalogue est momentanément indisponible. Réessayez dans quelques instants.",
+    "resetFilters": "Effacer les filtres",
+    "askUs": "Nous écrire"
+  },
+  "CourseDetail": {
+    "breadcrumb": "Fil d'Ariane",
+    "backToCourses": "Retour aux formations",
+    "about": "Présentation",
+    "objectives": "Objectifs",
+    "prerequisites": "Prérequis",
+    "program": "Programme",
+    "skills": "Compétences visées",
+    "finalProject": "Projet final",
+    "practical": "Informations pratiques",
+    "category": "Catégorie",
+    "level": "Niveau",
+    "duration": "Durée",
+    "hours": "{count} h",
+    "sessionsCount": "Nombre de séances",
+    "price": "Tarif",
+    "upcomingSessions": "Prochaines sessions",
+    "seatsLeft": "{count, plural, =0 {aucune place} one {# place restante} other {# places restantes}}",
+    "requestSession": "Demander cette session",
+    "noSessions": "Aucune session n'est planifiée pour le moment. Vous pouvez tout de même envoyer une demande d'inscription.",
+    "register": "Demander mon inscription"
+  },
+  "Registration": {
+    "title": "Demande d'inscription",
+    "lead": "Remplissez ce formulaire : nous reviendrons vers vous pour confirmer votre place. Ce n'est pas un engagement de paiement.",
+    "unavailable": "Le formulaire est momentanément indisponible. Réessayez dans quelques instants.",
+    "noCourses": "Aucune formation n'est ouverte à l'inscription pour le moment. Écrivez-nous pour être prévenu de l'ouverture.",
+    "contactUs": "Nous écrire",
+    "successTitle": "Demande reçue",
+    "successBody": "Merci, votre demande d'inscription est bien enregistrée. Nous vous contacterons pour la suite.",
+    "firstName": "Prénom",
+    "lastName": "Nom",
+    "email": "Adresse e-mail",
+    "phone": "Téléphone",
+    "age": "Âge",
+    "educationLevel": "Niveau d'études",
+    "educationLevelHint": "Par exemple : bac, licence 2, master 1.",
+    "institution": "Établissement",
+    "course": "Formation",
+    "chooseCourse": "Choisir une formation",
+    "session": "Session",
+    "anySession": "Pas de préférence",
+    "noSession": "Aucune session planifiée pour cette formation.",
+    "level": "Votre niveau actuel",
+    "chooseLevel": "Choisir un niveau",
+    "laptop": "Avez-vous votre propre ordinateur portable ?",
+    "yes": "Oui",
+    "no": "Non",
+    "message": "Message",
+    "consent": "J'accepte que mes données soient utilisées pour traiter ma demande, conformément à la <link>politique de confidentialité</link>.",
+    "submit": "Envoyer ma demande"
+  },
+  "Pfe": {
+    "title": "Accompagnement projet de fin d'études",
+    "lead": "Un appui pour mener votre PFE de l'idée à la soutenance.",
+    "helpTitle": "Ce que nous pouvons vous apporter",
+    "topics": [
+      {
+        "title": "Choisir son sujet",
+        "text": "Cadrer un sujet réaliste, avec un périmètre clair."
+      },
+      {
+        "title": "Concevoir",
+        "text": "Architecture, modélisation et choix techniques argumentés."
+      },
+      {
+        "title": "Réaliser et soutenir",
+        "text": "Développement, tests, rédaction du rapport et préparation de la soutenance."
+      }
+    ],
+    "terms": "Modalités",
+    "pricing": "Tarif",
+    "formTitle": "Parlez-nous de votre projet",
+    "formLead": "Décrivez votre sujet en quelques lignes : nous vous répondrons pour voir comment vous aider.",
+    "note": "Cet accompagnement complète l'encadrement de votre établissement, il ne le remplace pas.",
+    "name": "Nom et prénom",
+    "email": "Adresse e-mail",
+    "phone": "Téléphone",
+    "topic": "Sujet du projet",
+    "topicHint": "Une phrase suffit : par exemple, « application mobile de gestion de rendez-vous ».",
+    "message": "Détails (technologies, échéances, besoins)",
+    "submit": "Envoyer ma demande",
+    "successTitle": "Demande reçue",
+    "successBody": "Merci, nous avons bien reçu votre demande et reviendrons vers vous."
+  },
+  "About": {
+    "title": "À propos",
+    "lead": "Un centre de formation informatique à Monastir, fondé pour apprendre en construisant.",
+    "approachTitle": "Notre approche",
+    "principles": [
+      {
+        "title": "La pratique d'abord",
+        "text": "Chaque notion est suivie d'exercices et s'appuie sur des projets concrets."
+      },
+      {
+        "title": "Des groupes à taille humaine",
+        "text": "Des salles de petite capacité pour que chacun puisse être suivi."
+      },
+      {
+        "title": "Un portfolio à la clé",
+        "text": "Les projets réalisés servent à constituer un portfolio que l'on peut montrer."
+      },
+      {
+        "title": "Un regard sur la suite",
+        "text": "Stage, emploi ou études : chaque parcours se termine par une réflexion sur la suite."
+      }
+    ],
+    "teamTitle": "L'équipe",
+    "teamLead": "Le centre est fondé par :",
+    "founder": "Fondatrice",
+    "trainers": "Formateurs",
+    "certifications": "Certifications",
+    "partners": "Partenaires",
+    "cta": "Prêt à commencer ?",
+    "ctaCourses": "Voir les formations"
+  },
+  "Contact": {
+    "title": "Contact",
+    "lead": "Une question sur une formation, un horaire ou un projet ? Écrivez-nous.",
+    "formTitle": "Envoyer un message",
+    "infoTitle": "Coordonnées",
+    "map": "Plan d'accès",
+    "openMap": "Ouvrir le plan",
+    "name": "Nom et prénom",
+    "email": "Adresse e-mail",
+    "subject": "Objet",
+    "message": "Message",
+    "submit": "Envoyer le message",
+    "successTitle": "Message envoyé",
+    "successBody": "Merci, nous avons bien reçu votre message."
+  },
+  "Legal": {
+    "title": "Mentions légales",
+    "lead": "Informations sur l'éditeur du site.",
+    "draftNotice": "Page provisoire : les informations d'identification du centre ne sont pas encore renseignées. Le contenu juridique doit être validé avant la mise en ligne.",
+    "rows": [
+      "Dénomination du centre",
+      "Forme juridique",
+      "Adresse du siège",
+      "Numéro d'immatriculation (RNE)",
+      "Matricule fiscal",
+      "Responsable de la publication",
+      "E-mail de contact",
+      "Téléphone",
+      "Hébergeur du site"
+    ],
+    "ipTitle": "Propriété intellectuelle",
+    "ipText": "Les textes, graphismes et le logo de ce site appartiennent à leurs auteurs. Toute reproduction sans autorisation est interdite."
+  },
+  "Privacy": {
+    "title": "Politique de confidentialité",
+    "lead": "Quelles données nous collectons, pourquoi, et comment exercer vos droits.",
+    "draftNotice": "Page provisoire : elle décrit le fonctionnement actuel du site et doit être validée juridiquement avant la mise en ligne.",
+    "sections": [
+      {
+        "title": "Responsable du traitement",
+        "text": "Le centre de formation, dont l'identité complète figurera dans les mentions légales.",
+        "todo": true
+      },
+      {
+        "title": "Données collectées",
+        "text": "Inscription : nom, prénom, e-mail, téléphone, âge, niveau d'études, établissement, formation souhaitée et message.\nContact et PFE : nom, e-mail, téléphone (facultatif), sujet et message.\nCompte : nom, prénom, e-mail et mot de passe, conservé uniquement sous une forme chiffrée irréversible."
+      },
+      {
+        "title": "Finalités",
+        "text": "Traiter votre demande d'inscription, répondre à vos messages et gérer votre compte. Les données ne sont utilisées que pour ces finalités."
+      },
+      {
+        "title": "Cookies",
+        "text": "Ce site n'utilise que des cookies strictement nécessaires : votre session de connexion (cookies sécurisés, inaccessibles aux scripts) et la mémorisation de la langue. Aucun cookie publicitaire ni outil de mesure d'audience n'est installé à ce jour."
+      },
+      {
+        "title": "Durée de conservation",
+        "text": "La durée de conservation des données sera précisée avant la mise en ligne.",
+        "todo": true
+      },
+      {
+        "title": "Hébergement et sous-traitants",
+        "text": "L'hébergeur et les éventuels prestataires seront indiqués avant la mise en ligne.",
+        "todo": true
+      },
+      {
+        "title": "Vos droits",
+        "text": "Conformément à la loi organique n° 2004-63 du 27 juillet 2004 relative à la protection des données à caractère personnel, vous pouvez demander l'accès, la rectification ou la suppression de vos données, et vous opposer à leur traitement pour des motifs légitimes. Écrivez-nous depuis la page Contact. Vous pouvez aussi saisir l'Instance nationale de protection des données personnelles (INPDP)."
+      }
+    ]
+  },
+  "Auth": {
+    "email": "Adresse e-mail",
+    "password": "Mot de passe",
+    "firstName": "Prénom",
+    "lastName": "Nom",
+    "loginTitle": "Connexion",
+    "loginLead": "Accédez à votre espace.",
+    "loginSubmit": "Se connecter",
+    "loggingIn": "Connexion…",
+    "forgotLink": "Mot de passe oublié ?",
+    "noAccount": "Pas encore de compte ?",
+    "signupLink": "Créer un compte",
+    "signupTitle": "Créer un compte",
+    "signupLead": "Indiquez vos informations : nous vous envoyons un lien pour activer le compte et choisir votre mot de passe.",
+    "signupHint": "Vous choisirez votre mot de passe à l'étape suivante, depuis le lien reçu par e-mail.",
+    "signupSubmit": "Recevoir le lien d'activation",
+    "signupSuccessTitle": "Vérifiez votre boîte e-mail",
+    "signupSuccessBody": "Si l'adresse est valide, un lien d'activation vient de lui être envoyé. Il est valable 72 heures et ne sert qu'une fois.",
+    "haveAccount": "Vous avez déjà un compte ?",
+    "loginLink": "Se connecter",
+    "forgotTitle": "Mot de passe oublié",
+    "forgotLead": "Saisissez votre adresse e-mail : si un compte existe, nous vous envoyons un lien de réinitialisation.",
+    "forgotSubmit": "Recevoir le lien",
+    "forgotSuccessTitle": "Vérifiez votre boîte e-mail",
+    "forgotSuccessBody": "Si un compte correspond à cette adresse, un lien de réinitialisation vient d'être envoyé. Il est valable 1 heure.",
+    "backToLogin": "Retour à la connexion",
+    "newPassword": "Nouveau mot de passe",
+    "confirmPassword": "Confirmer le mot de passe",
+    "passwordRule": "10 caractères minimum. Une phrase de passe fonctionne très bien.",
+    "resetTitle": "Nouveau mot de passe",
+    "resetLead": "Choisissez un nouveau mot de passe. Vos autres appareils seront déconnectés.",
+    "resetSubmit": "Enregistrer le mot de passe",
+    "resetSuccessTitle": "Mot de passe modifié",
+    "resetSuccessBody": "Vous pouvez maintenant vous connecter avec votre nouveau mot de passe.",
+    "activateTitle": "Activer mon compte",
+    "activateLead": "Choisissez votre mot de passe pour activer votre compte.",
+    "activateSubmit": "Activer mon compte",
+    "linkInvalid": "Ce lien est invalide, expiré ou déjà utilisé.",
+    "requestNewReset": "Demander un nouveau lien",
+    "requestNewActivation": "Recevoir un nouveau lien d'activation"
+  },
+  "Space": {
+    "title": "Votre espace",
+    "welcome": "Bonjour {name}",
+    "email": "E-mail",
+    "role": "Profil",
+    "comingSoon": "Votre tableau de bord sera disponible prochainement.",
+    "logout": "Se déconnecter"
+  },
+  "Roles": {
+    "STUDENT": "Étudiant",
+    "TRAINER": "Formateur",
+    "ADMIN": "Administrateur"
+  },
+  "Errors": {
+    "field": {
+      "required": "Ce champ est obligatoire.",
+      "too_long": "Ce texte est trop long.",
+      "invalid_email": "Saisissez une adresse e-mail valide.",
+      "invalid_phone": "Saisissez un numéro de téléphone valide.",
+      "out_of_range": "Cette valeur est hors des limites autorisées.",
+      "invalid_number": "Saisissez un nombre entier.",
+      "invalid_value": "Cette valeur n'est pas valide.",
+      "consent_required": "Vous devez accepter pour continuer.",
+      "password_too_short": "Le mot de passe doit contenir au moins 10 caractères.",
+      "password_too_long": "Le mot de passe est trop long (128 caractères maximum).",
+      "password_mismatch": "Les deux mots de passe ne sont pas identiques.",
+      "invalid_token": "Ce lien est invalide, expiré ou déjà utilisé.",
+      "invalid_password": "Mot de passe incorrect.",
+      "password_unchanged": "Le nouveau mot de passe doit être différent de l'ancien.",
+      "invalid_id": "Cette valeur n'est pas valide.",
+      "invalid_url": "Saisissez un lien HTTPS valide (https://…).",
+      "french_required": "Le français est obligatoire.",
+      "end_before_start": "La fin doit être après le début."
+    },
+    "api": {
+      "generic": "Une erreur est survenue. Réessayez dans quelques instants.",
+      "fix_fields": "Corrigez les champs signalés puis réessayez.",
+      "invalid_credentials": "E-mail ou mot de passe incorrect.",
+      "rate_limited": "Trop de tentatives. Patientez quelques minutes avant de réessayer.",
+      "rate_limited_wait": "Trop de tentatives. Réessayez dans {minutes, plural, one {# minute} other {# minutes}}.",
+      "service_unavailable": "Le service est momentanément indisponible. Réessayez dans quelques instants.",
+      "database_unavailable": "Le service est momentanément indisponible. Réessayez dans quelques instants.",
+      "internal_error": "Une erreur est survenue de notre côté. Réessayez dans quelques instants.",
+      "course_not_found": "Cette formation n'existe pas ou n'est plus disponible.",
+      "registration_already_exists": "Une demande existe déjà pour cette formation avec cette adresse e-mail.",
+      "session_closed": "Cette session n'accepte plus de demandes.",
+      "validation_failed": "Corrigez les champs signalés puis réessayez.",
+      "unauthenticated": "Votre session a expiré. Reconnectez-vous.",
+      "permission_denied": "Vous n'avez pas accès à cette action.",
+      "invalid_token": "Ce lien est invalide, expiré ou déjà utilisé.",
+      "not_found": "Cet élément est introuvable.",
+      "project_locked": "Ce projet ne peut plus être modifié.",
+      "enrollment_not_active": "Votre inscription n'est plus active : le projet ne peut plus être modifié.",
+      "event_not_started": "Ce cours n'a pas encore commencé : les présences ne peuvent pas être saisies.",
+      "project_not_reviewable": "Ce projet ne peut plus être relu (non rendu ou déjà validé).",
+      "session_full": "Cette session est complète.",
+      "registration_already_decided": "Cette demande a déjà été traitée.",
+      "already_enrolled": "Cet étudiant est déjà inscrit à cette session.",
+      "email_belongs_to_staff": "Cette adresse e-mail appartient à un compte de l'équipe.",
+      "account_unavailable": "Le compte lié à cette adresse est suspendu ou supprimé.",
+      "slug_already_used": "Cet identifiant d'URL est déjà utilisé.",
+      "course_has_enrollments": "Impossible : des étudiants actifs sont inscrits à cette formation.",
+      "capacity_below_enrollments": "La capacité ne peut pas être inférieure au nombre d'inscrits actifs.",
+      "event_overlap": "Ce cours chevauche un autre cours de la session.",
+      "event_has_attendance": "Impossible : l'appel a déjà été fait pour ce cours.",
+      "email_already_used": "Cette adresse e-mail est déjà utilisée.",
+      "french_required": "Le contenu en français est obligatoire pour publier.",
+      "account_not_activated": "Ce compte n'est pas encore activé.",
+      "certificate_already_issued": "Une attestation existe déjà pour cette inscription."
+    },
+    "page": {
+      "title": "Un problème est survenu",
+      "text": "La page n'a pas pu s'afficher. Réessayez ; si le problème persiste, revenez un peu plus tard.",
+      "retry": "Réessayer"
+    },
+    "notFound": {
+      "title": "Page introuvable",
+      "text": "Cette page n'existe pas ou a été déplacée.",
+      "home": "Retour à l'accueil"
+    }
+  },
+  "Student": {
+    "nav": {
+      "label": "Navigation de l'espace étudiant",
+      "dashboard": "Tableau de bord",
+      "courses": "Mes formations",
+      "schedule": "Planning",
+      "projects": "Projets",
+      "certificates": "Attestations",
+      "registrations": "Mes demandes",
+      "payments": "Paiements",
+      "notifications": "Notifications",
+      "profile": "Mon profil",
+      "unread": "{count, plural, one {# non lue} other {# non lues}}"
+    },
+    "dashboard": {
+      "welcome": "Bonjour {name}",
+      "lead": "Votre progression et vos prochains cours.",
+      "unread": "{count, plural, one {Vous avez # notification non lue.} other {Vous avez # notifications non lues.}}",
+      "seeNotifications": "Voir les notifications",
+      "myCourses": "Mes formations",
+      "nextEvents": "Prochains cours",
+      "fullSchedule": "Voir tout le planning"
+    },
+    "courses": {
+      "lead": "Les formations auxquelles vous êtes inscrit(e).",
+      "empty": "Vous n'êtes inscrit(e) à aucune formation pour le moment.",
+      "browse": "Découvrir les formations",
+      "progress": "Progression"
+    },
+    "schedule": {
+      "lead": "Vos prochains cours.",
+      "empty": "Aucun cours planifié pour le moment.",
+      "roomTbd": "Salle à définir"
+    },
+    "projects": {
+      "lead": "Déposez le lien de votre dépôt et rendez votre projet à votre formateur.",
+      "empty": "Aucun projet ne vous a encore été attribué.",
+      "description": "Description",
+      "repoUrl": "Lien du dépôt (HTTPS)",
+      "repoHint": "Exemple : le lien de votre dépôt GitHub ou GitLab. Les liens en http:// sont refusés.",
+      "save": "Enregistrer le brouillon",
+      "submit": "Rendre le projet",
+      "submitHint": "Après le rendu, le projet est verrouillé jusqu'à la relecture de votre formateur.",
+      "saved": "Brouillon enregistré.",
+      "submitted": "Projet rendu. Votre formateur sera informé.",
+      "submittedOn": "Rendu le {date}",
+      "trainerFeedback": "Retour du formateur",
+      "grade": "Note"
+    },
+    "certificates": {
+      "lead": "Attestations émises par le centre à l'issue de vos formations.",
+      "empty": "Aucune attestation pour le moment.",
+      "type": "Attestation de formation du centre",
+      "issuedOn": "Délivrée le {date}",
+      "code": "Code de vérification"
+    },
+    "registrations": {
+      "lead": "Suivi de vos demandes d'inscription.",
+      "empty": "Vous n'avez déposé aucune demande.",
+      "apply": "Faire une demande d'inscription",
+      "sentOn": "Envoyée le {date}"
+    },
+    "payments": {
+      "lead": "Historique des versements enregistrés par le centre.",
+      "manualNotice": "Les paiements sont enregistrés manuellement par l'administration du centre. Pour toute question, contactez-nous.",
+      "empty": "Aucun paiement enregistré.",
+      "paidOn": "Payé le {date}",
+      "recordedOn": "Enregistré le {date}"
+    },
+    "notifications": {
+      "lead": "Les informations importantes concernant votre parcours.",
+      "empty": "Aucune notification.",
+      "new": "Nouveau",
+      "markRead": "Marquer comme lue",
+      "markAll": "Tout marquer comme lu",
+      "open": "Ouvrir"
+    },
+    "profile": {
+      "lead": "Vos informations personnelles.",
+      "email": "Adresse e-mail (non modifiable)",
+      "firstName": "Prénom",
+      "lastName": "Nom",
+      "phone": "Téléphone",
+      "language": "Langue préférée",
+      "languageHint": "Utilisée pour les e-mails et les titres de formation.",
+      "save": "Enregistrer",
+      "saved": "Profil mis à jour.",
+      "logout": "Se déconnecter"
+    },
+    "enrollmentStatus": {
+      "ACTIVE": "En cours",
+      "COMPLETED": "Terminée",
+      "DROPPED": "Abandonnée"
+    },
+    "projectStatus": {
+      "NOT_STARTED": "Non commencé",
+      "IN_PROGRESS": "En cours",
+      "SUBMITTED": "Rendu",
+      "REVIEWED": "Relu — à corriger",
+      "VALIDATED": "Validé"
+    },
+    "paymentStatus": {
+      "UNPAID": "Non payé",
+      "PARTIAL": "Partiel",
+      "PAID": "Payé",
+      "REFUNDED": "Remboursé"
+    },
+    "paymentMethod": {
+      "CASH": "Espèces",
+      "BANK_TRANSFER": "Virement",
+      "OTHER": "Autre"
+    },
+    "registrationStatus": {
+      "PENDING": "En attente",
+      "ACCEPTED": "Acceptée",
+      "REJECTED": "Refusée",
+      "WAITLIST": "Liste d'attente"
+    },
+    "notificationType": {
+      "REGISTRATION_DECISION": "Une décision a été prise sur votre demande d'inscription.",
+      "PAYMENT_UPDATE": "Votre situation de paiement a été mise à jour.",
+      "PROJECT_REVIEWED": "Votre projet a été relu par votre formateur.",
+      "CERTIFICATE_ISSUED": "Une attestation a été émise pour vous.",
+      "SYSTEM": "Message du centre.",
+      "PROJECT_SUBMITTED": "Un étudiant a rendu un projet à relire."
+    }
+  },
+  "Trainer": {
+    "logout": "Se déconnecter",
+    "backToSessions": "Mes sessions",
+    "backToSession": "Retour à la session",
+    "enrollmentCompleted": "Terminée",
+    "dashboard": {
+      "welcome": "Bonjour {name}",
+      "lead": "Vos sessions, vos étudiants et vos projets à relire.",
+      "mySessions": "Mes sessions",
+      "empty": "Aucune session ne vous est assignée pour le moment.",
+      "students": "{count, plural, =0 {Aucun étudiant} one {# étudiant} other {# étudiants}}",
+      "open": "Ouvrir la session"
+    },
+    "session": {
+      "title": "Session",
+      "lead": "Étudiants, emploi du temps et présences.",
+      "projectsLink": "Voir les projets de la session",
+      "students": "Étudiants",
+      "noStudents": "Aucun étudiant inscrit à cette session.",
+      "progress": "Progression",
+      "schedule": "Emploi du temps",
+      "noEvents": "Aucun cours planifié pour cette session.",
+      "roomTbd": "Salle à définir",
+      "takeAttendance": "Faire l'appel",
+      "upcoming": "À venir"
+    },
+    "attendance": {
+      "title": "Présences",
+      "pickOne": "Choisissez au moins un statut avant d'enregistrer.",
+      "saved": "Présences enregistrées.",
+      "save": "Enregistrer les présences",
+      "note": "Remarque",
+      "statusFor": "Présence de {name}",
+      "status": {
+        "PRESENT": "Présent(e)",
+        "ABSENT": "Absent(e)",
+        "LATE": "En retard",
+        "EXCUSED": "Excusé(e)"
+      }
+    },
+    "projects": {
+      "title": "Projets de la session",
+      "lead": "Relisez les projets rendus : validez-les ou demandez des corrections.",
+      "empty": "Aucun projet pour cette session.",
+      "notSubmitted": "Cet étudiant n'a pas encore rendu ce projet."
+    },
+    "review": {
+      "decision": "Décision",
+      "toFix": "À corriger",
+      "validate": "Valider",
+      "feedback": "Commentaire",
+      "feedbackHint": "Obligatoire si vous demandez des corrections.",
+      "grade": "Note sur 20",
+      "gradeHint": "Facultative, par exemple 15 ou 15.5.",
+      "save": "Enregistrer la relecture",
+      "notifyHint": "L'étudiant est notifié. Un projet validé ne peut plus être modifié.",
+      "savedReviewed": "Corrections demandées. L'étudiant a été notifié.",
+      "savedValidated": "Projet validé. L'étudiant a été notifié."
+    },
+    "notifications": {
+      "title": "Notifications",
+      "lead": "Les projets rendus par vos étudiants apparaissent ici.",
+      "unread": "{count, plural, one {# projet rendu attend votre relecture.} other {# projets rendus attendent votre relecture.}}",
+      "see": "Voir les notifications",
+      "empty": "Aucune notification.",
+      "new": "Nouveau",
+      "markRead": "Marquer comme lue",
+      "markAll": "Tout marquer comme lu",
+      "open": "Voir les projets de la session"
+    }
+  },
+  "Admin": {
+    "logout": "Se déconnecter",
+    "nav": {
+      "label": "Administration",
+      "dashboard": "Tableau de bord",
+      "courses": "Formations",
+      "sessions": "Sessions",
+      "requests": "Demandes",
+      "messages": "Messages",
+      "payments": "Paiements",
+      "students": "Étudiants",
+      "trainers": "Formateurs",
+      "faq": "FAQ",
+      "settings": "Paramètres"
+    },
+    "pager": {
+      "label": "Pagination",
+      "previous": "Précédent",
+      "next": "Suivant",
+      "page": "Page {page} sur {total}"
+    },
+    "filters": {
+      "search": "Recherche",
+      "status": "Statut",
+      "all": "Tous",
+      "apply": "Filtrer"
+    },
+    "dashboard": {
+      "welcome": "Bonjour {name}",
+      "lead": "Vue d'ensemble du centre : inscriptions, paiements et remplissage.",
+      "pendingNotice": "{count, plural, one {# demande d'inscription attend une décision.} other {# demandes d'inscription attendent une décision.}}",
+      "seeRequests": "Voir les demandes",
+      "statsTitle": "Chiffres clés",
+      "stat": {
+        "students": "Étudiants",
+        "registrations": "Demandes reçues",
+        "pending": "Demandes en attente",
+        "courses": "Formations publiées",
+        "revenue": "Revenus encaissés (TND)",
+        "fillRate": "Taux de remplissage"
+      },
+      "open": "Ouvrir",
+      "statsNote": "Revenus = paiements au statut « Payé ». Remplissage = places occupées / capacité des sessions ouvertes ou en cours.",
+      "demandTitle": "Formations les plus demandées",
+      "demandEmpty": "Aucune demande pour le moment.",
+      "demandCount": "{count, plural, one {# demande} other {# demandes}}"
+    },
+    "course": {
+      "listTitle": "Formations",
+      "listLead": "Créez, modifiez et publiez le catalogue. Seules les formations publiées sont visibles sur le site.",
+      "new": "Nouvelle formation",
+      "newTitle": "Nouvelle formation",
+      "newLead": "La formation est créée en brouillon ; publiez-la quand le contenu est prêt.",
+      "editTitle": "Modifier la formation",
+      "editLead": "Le français est obligatoire ; l'arabe et l'anglais sont facultatifs (repli sur le français).",
+      "back": "Retour aux formations",
+      "empty": "Aucune formation ne correspond.",
+      "edit": "Modifier",
+      "publish": "Publier",
+      "unpublish": "Désactiver",
+      "toDraft": "Repasser en brouillon",
+      "confirmUnpublish": "Désactiver cette formation ? Elle ne sera plus visible sur le site.",
+      "draftNotice": "Cette formation est un brouillon : elle n'apparaît pas sur le site.",
+      "dangerTitle": "Suppression",
+      "deleteHint": "La suppression retire la formation du site et de l'administration. Impossible tant que des étudiants actifs y sont inscrits.",
+      "delete": "Supprimer la formation",
+      "confirmDelete": "Supprimer définitivement cette formation ?",
+      "col": {
+        "title": "Titre",
+        "slug": "Identifiant",
+        "status": "Statut",
+        "actions": "Actions"
+      },
+      "status": {
+        "DRAFT": "Brouillon",
+        "PUBLISHED": "Publiée",
+        "DISABLED": "Désactivée"
+      },
+      "form": {
+        "general": "Informations générales",
+        "slug": "Identifiant d'URL",
+        "slugHint": "Minuscules, chiffres et tirets (ex. ma-formation). Il apparaît dans l'adresse de la page.",
+        "category": "Catégorie",
+        "level": "Niveau",
+        "tbd": "À définir",
+        "tbdHint": "Laissez vide si non décidé : le site affichera « À définir ».",
+        "duration": "Durée (heures)",
+        "sessionsCount": "Nombre de séances",
+        "price": "Prix (TND)",
+        "priceHint": "Ne saisissez un prix que s'il est officiel (ex. 120 ou 120.500). Vide = « À définir ».",
+        "lang": {
+          "FR": "Français",
+          "AR": "Arabe",
+          "EN": "Anglais"
+        },
+        "optionalLang": "facultatif",
+        "title": "Titre",
+        "summary": "Résumé court",
+        "description": "Description",
+        "objectives": "Objectifs",
+        "prerequisites": "Prérequis",
+        "skills": "Compétences visées",
+        "perLine": "Un élément par ligne.",
+        "finalProject": "Projet final",
+        "program": "Programme",
+        "programHint": "Une ligne = un module ; les sujets commencent par « - » (ex. : « Module 1 » puis « - Variables »).",
+        "create": "Créer la formation",
+        "save": "Enregistrer",
+        "saved": "Formation enregistrée."
+      }
+    },
+    "session": {
+      "listTitle": "Sessions",
+      "listLead": "Planifiez les sessions, assignez un formateur et suivez les inscriptions.",
+      "new": "Nouvelle session",
+      "newTitle": "Nouvelle session",
+      "newLead": "Une session est un groupe de personnes suivant une formation à des dates données.",
+      "back": "Retour aux sessions",
+      "empty": "Aucune session.",
+      "manage": "Gérer",
+      "manageTitle": "Gérer la session",
+      "manageLead": "Statut, dates, planning et inscrits.",
+      "col": {
+        "course": "Formation",
+        "dates": "Dates",
+        "seats": "Places",
+        "status": "Statut",
+        "actions": "Actions"
+      },
+      "statusTitle": "Statut",
+      "setStatus": "Passer en : {status}",
+      "confirmCancel": "Annuler cette session ?",
+      "editTitle": "Informations de la session",
+      "eventsTitle": "Planning des cours",
+      "noEvents": "Aucun cours planifié.",
+      "addEvent": "Ajouter un cours",
+      "addEventSubmit": "Ajouter",
+      "eventAdded": "Cours ajouté.",
+      "startsAt": "Début",
+      "endsAt": "Fin",
+      "tzHint": "Heure de Tunis. Deux cours d'une même session ne peuvent pas se chevaucher.",
+      "deleteEvent": "Supprimer",
+      "confirmDeleteEvent": "Supprimer ce cours du planning ?",
+      "enrollmentsTitle": "Étudiants inscrits",
+      "noEnrollments": "Aucun étudiant inscrit. Acceptez une demande d'inscription pour en ajouter.",
+      "projectsCount": "{count, plural, =0 {Aucun projet} one {# projet} other {# projets}}",
+      "certificate": "Attestation :",
+      "manageEnrollment": "Gérer cet étudiant",
+      "progress": "Progression (%)",
+      "enrollmentStatus": "Statut de l'inscription",
+      "saveEnrollment": "Enregistrer",
+      "enrollmentSaved": "Inscription mise à jour.",
+      "createProject": "Créer le projet",
+      "projectCreated": "Projet créé.",
+      "projectTitle": "Titre du projet",
+      "projectDescription": "Description du projet",
+      "recordPayment": "Enregistrer le paiement",
+      "paymentRecorded": "Paiement enregistré.",
+      "amount": "Montant (TND)",
+      "amountHint": "Ex. 100 ou 100.500",
+      "paymentStatus": "Statut du paiement",
+      "method": "Mode de paiement",
+      "reference": "Référence",
+      "paymentNote": "Note interne",
+      "paymentNoteHint": "Jamais visible par l'étudiant.",
+      "issueCertificate": "Délivrer l'attestation",
+      "confirmCertificate": "Délivrer une attestation à cet étudiant ? Une seule attestation par inscription.",
+      "form": {
+        "course": "Formation",
+        "trainer": "Formateur",
+        "tbd": "À définir",
+        "tbdHint": "Laissez vide si non décidé.",
+        "label": "Nom du groupe",
+        "capacity": "Capacité (places)",
+        "startDate": "Date de début",
+        "endDate": "Date de fin",
+        "scheduleNote": "Horaires (texte libre)",
+        "scheduleNoteHint": "Ne renseignez que des horaires confirmés.",
+        "create": "Créer la session",
+        "save": "Enregistrer",
+        "saved": "Session enregistrée."
+      }
+    },
+    "requests": {
+      "title": "Demandes d'inscription",
+      "lead": "Examinez chaque demande puis acceptez, mettez en liste d'attente ou refusez.",
+      "empty": "Aucune demande.",
+      "open": "Examiner",
+      "col": {
+        "candidate": "Candidat",
+        "course": "Formation",
+        "date": "Reçue le",
+        "status": "Statut",
+        "actions": "Actions"
+      },
+      "detailTitle": "Demande d'inscription",
+      "detailLead": "Dossier du candidat et décision.",
+      "back": "Retour aux demandes",
+      "candidate": "Candidat",
+      "f": {
+        "course": "Formation",
+        "email": "E-mail",
+        "phone": "Téléphone",
+        "age": "Âge",
+        "education": "Niveau d'études",
+        "institution": "Établissement",
+        "level": "Niveau en informatique",
+        "laptop": "Ordinateur personnel",
+        "date": "Reçue le",
+        "message": "Message du candidat",
+        "adminNote": "Note interne"
+      },
+      "yes": "Oui",
+      "no": "Non",
+      "decision": "Décision",
+      "acceptHint": "Accepter crée l'inscription et, si besoin, le compte étudiant (un lien d'activation est envoyé). Aucune place n'est réservée tant que la décision n'est pas prise.",
+      "decisionLegend": "Votre décision",
+      "accept": "Accepter",
+      "waitlist": "Liste d'attente",
+      "reject": "Refuser",
+      "session": "Session",
+      "sessionHint": "Obligatoire pour accepter (si le candidat n'en a pas choisi).",
+      "note": "Note interne",
+      "noteHint": "Visible uniquement par l'administration.",
+      "submit": "Enregistrer la décision",
+      "decided": "Décision enregistrée.",
+      "alreadyDecided": "Cette demande a déjà été traitée."
+    },
+    "inbox": {
+      "title": "Messages reçus",
+      "lead": "Messages du formulaire de contact et demandes d'accompagnement PFE.",
+      "tabs": "Type de message",
+      "empty": "Aucun message.",
+      "tab": {
+        "contact": "Contact",
+        "pfe": "Accompagnement PFE"
+      },
+      "status": {
+        "NEW": "Nouveau",
+        "IN_REVIEW": "En cours",
+        "CLOSED": "Traité"
+      },
+      "mark": {
+        "NEW": "Marquer nouveau",
+        "IN_REVIEW": "Marquer en cours",
+        "CLOSED": "Marquer traité"
+      }
+    },
+    "payments": {
+      "title": "Paiements",
+      "lead": "Suivi des versements (espèces, virement). Aucun paiement en ligne.",
+      "howTo": "Pour enregistrer un paiement : ouvrez la session, puis « Gérer cet étudiant ».",
+      "empty": "Aucun paiement.",
+      "col": {
+        "student": "Étudiant",
+        "course": "Formation",
+        "amount": "Montant",
+        "status": "Statut",
+        "date": "Date",
+        "actions": "Actions"
+      },
+      "edit": "Modifier",
+      "method": "Mode",
+      "note": "Note interne",
+      "save": "Enregistrer",
+      "saved": "Paiement mis à jour."
+    },
+    "students": {
+      "title": "Étudiants",
+      "lead": "Comptes étudiants. Suspendre ferme immédiatement toutes les sessions ouvertes.",
+      "empty": "Aucun étudiant.",
+      "col": {
+        "name": "Nom",
+        "email": "E-mail",
+        "enrollments": "Inscriptions",
+        "status": "Statut",
+        "actions": "Actions"
+      },
+      "status": {
+        "PENDING_ACTIVATION": "En attente d'activation",
+        "ACTIVE": "Actif",
+        "SUSPENDED": "Suspendu"
+      },
+      "suspend": "Suspendre",
+      "reactivate": "Réactiver",
+      "confirmSuspend": "Suspendre ce compte ? L'étudiant sera déconnecté."
+    },
+    "trainers": {
+      "title": "Formateurs",
+      "lead": "Créez les comptes des formateurs et assignez-les aux sessions.",
+      "newTitle": "Nouveau formateur",
+      "activationNotice": "Un lien d'activation est envoyé à l'adresse e-mail saisie : le formateur choisit lui-même son mot de passe.",
+      "firstName": "Prénom",
+      "lastName": "Nom",
+      "email": "E-mail",
+      "specialties": "Spécialités",
+      "specialtiesHint": "Séparées par des virgules. Ne renseignez que des informations confirmées.",
+      "bio": "Biographie",
+      "bioHint": "Laissez vide si non fournie.",
+      "create": "Créer le formateur",
+      "created": "Formateur créé : l'e-mail d'activation est envoyé.",
+      "listTitle": "Équipe pédagogique",
+      "empty": "Aucun formateur.",
+      "edit": "Modifier",
+      "save": "Enregistrer",
+      "saved": "Formateur mis à jour."
+    },
+    "faq": {
+      "title": "Questions fréquentes",
+      "lead": "Les questions publiées s'affichent sur le site dans leur langue.",
+      "newTitle": "Nouvelle question",
+      "add": "Ajouter",
+      "saved": "Question enregistrée.",
+      "listTitle": "Questions existantes",
+      "empty": "Aucune question.",
+      "language": "Langue",
+      "order": "Ordre",
+      "orderHint": "Plus petit = affiché plus haut.",
+      "question": "Question",
+      "answer": "Réponse",
+      "visibility": "Visibilité",
+      "published": "Publiée",
+      "hidden": "Masquée",
+      "edit": "Modifier",
+      "save": "Enregistrer",
+      "delete": "Supprimer",
+      "confirmDelete": "Supprimer cette question ?"
+    },
+    "settings": {
+      "title": "Paramètres du site",
+      "lead": "Coordonnées et informations affichées sur le site public.",
+      "notice": "Ne saisissez que des informations officielles et confirmées. Une valeur vide s'affiche « À définir » sur le site.",
+      "currentTodo": "Actuellement « À définir ».",
+      "save": "Enregistrer",
+      "saved": "Paramètre enregistré (visible sur le site d'ici une minute).",
+      "emptyMeansTodo": "Vider un champ remet la valeur à « À définir ».",
+      "key": {
+        "PROJECT_NAME": "Nom du centre",
+        "PHONE": "Téléphone",
+        "EMAIL": "E-mail de contact",
+        "ADDRESS": "Adresse",
+        "OPENING_HOURS": "Horaires d'ouverture",
+        "CITY": "Ville",
+        "COUNTRY": "Pays"
+      }
+    }
+  }
+}

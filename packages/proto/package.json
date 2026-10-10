@@ -1,0 +1,16 @@
+{
+  "name": "@center/proto",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Contrats gRPC (Protocol Buffers). Source de vérité : le code TypeScript est généré dans @center/proto-gen.",
+  "scripts": {
+    "gen": "buf generate",
+    "lint": "buf lint",
+    "format": "buf format -w",
+    "postinstall": "buf generate"
+  },
+  "devDependencies": {
+    "@bufbuild/buf": "^1.73.0",
+    "ts-proto": "^2.13.0"
+  }
+}

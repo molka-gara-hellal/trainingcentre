@@ -1,0 +1,94 @@
+syntax = "proto3";
+
+package student.v1;
+
+import "common/v1/common.proto";
+import "learning/v1/learning.proto";
+import "payment/v1/payment.proto";
+import "registration/v1/registration.proto";
+import "user/v1/user.proto";
+
+// Espace étudiant (rôle STUDENT). Chaque requête ne renvoie que les données de l'utilisateur connecté. Phase 7.
+service StudentService {
+  rpc GetDashboard(GetDashboardRequest) returns (GetDashboardResponse);
+  rpc ListMyEnrollments(ListMyEnrollmentsRequest) returns (ListMyEnrollmentsResponse);
+  rpc ListMySchedule(ListMyScheduleRequest) returns (ListMyScheduleResponse);
+  rpc ListMyProjects(ListMyProjectsRequest) returns (ListMyProjectsResponse);
+  rpc UpdateMyProject(UpdateMyProjectRequest) returns (UpdateMyProjectResponse);
+  rpc ListMyCertificates(ListMyCertificatesRequest) returns (ListMyCertificatesResponse);
+  rpc ListMyRegistrations(ListMyRegistrationsRequest) returns (ListMyRegistrationsResponse);
+  // Lecture seule : l'étudiant consulte ses versements (suivi manuel par l'administration).
+  rpc ListMyPayments(ListMyPaymentsRequest) returns (ListMyPaymentsResponse);
+}
+
+message GetDashboardRequest {
+  // Langue des titres de formation ; à défaut, la langue du profil.
+  common.v1.Locale locale = 1;
+}
+
+message GetDashboardResponse {
+  user.v1.User user = 1;
+  repeated learning.v1.Enrollment enrollments = 2;
+  repeated learning.v1.ScheduleEvent next_events = 3;
+  int32 unread_notifications = 4;
+}
+
+message ListMyEnrollmentsRequest {
+  // Langue des titres de formation ; à défaut, la langue du profil.
+  common.v1.Locale locale = 1;
+}
+
+message ListMyEnrollmentsResponse {
+  repeated learning.v1.Enrollment enrollments = 1;
+}
+
+message ListMyScheduleRequest {
+  // Langue des titres de formation ; à défaut, la langue du profil.
+  common.v1.Locale locale = 1;
+}
+
+message ListMyScheduleResponse {
+  repeated learning.v1.ScheduleEvent events = 1;
+}
+
+message ListMyProjectsRequest {}
+
+message ListMyProjectsResponse {
+  repeated learning.v1.Project projects = 1;
+}
+
+// L'étudiant peut renseigner le lien du dépôt et la description ; pas le statut de validation.
+message UpdateMyProjectRequest {
+  string project_id = 1;
+  optional string description = 2;
+  optional string repo_url = 3;
+  bool submit = 4;
+}
+
+message UpdateMyProjectResponse {
+  learning.v1.Project project = 1;
+}
+
+message ListMyCertificatesRequest {
+  // Langue des titres de formation ; à défaut, la langue du profil.
+  common.v1.Locale locale = 1;
+}
+
+message ListMyCertificatesResponse {
+  repeated learning.v1.Certificate certificates = 1;
+}
+
+message ListMyRegistrationsRequest {
+  // Langue des titres de formation ; à défaut, la langue du profil.
+  common.v1.Locale locale = 1;
+}
+
+message ListMyRegistrationsResponse {
+  repeated registration.v1.Registration registrations = 1;
+}
+
+message ListMyPaymentsRequest {}
+
+message ListMyPaymentsResponse {
+  repeated payment.v1.Payment payments = 1;
+}

@@ -1,0 +1,982 @@
+{
+  "Meta": {
+    "title": "IT training center in Monastir",
+    "siteShort": "IT training center",
+    "description": "Hands-on IT courses in Monastir: from theory to portfolio, with real projects at every step."
+  },
+  "Common": {
+    "todo": "To be defined",
+    "required": "required",
+    "optional": "optional",
+    "sending": "Sending…",
+    "consent": "I agree that my data may be used to handle my request, as described in the <link>privacy policy</link>."
+  },
+  "Nav": {
+    "brandFallback": "IT training center",
+    "courses": "Courses",
+    "pfe": "PFE",
+    "about": "About",
+    "contact": "Contact",
+    "login": "Log in",
+    "register": "Register",
+    "logout": "Log out",
+    "mySpace": "My space",
+    "menu": "Menu",
+    "close": "Close",
+    "main": "Main navigation",
+    "mobile": "Mobile navigation",
+    "language": "Language",
+    "skip": "Skip to content"
+  },
+  "Footer": {
+    "where": "Where to find us",
+    "address": "Address",
+    "hours": "Opening hours",
+    "reach": "Get in touch",
+    "phone": "Phone",
+    "email": "Email",
+    "writeUs": "Write to us",
+    "information": "Information",
+    "legal": "Legal notice",
+    "privacy": "Privacy policy",
+    "about": "About",
+    "legalNav": "Legal information",
+    "rights": "© {year} IT training center, Monastir. All rights reserved.",
+    "location": "Monastir, Tunisia"
+  },
+  "Home": {
+    "title": "Learn IT by doing",
+    "lead": "A training center in Monastir: from theory to portfolio, with real projects at every step.",
+    "ctaCourses": "Explore the courses",
+    "ctaRegister": "Register",
+    "routeTitle": "A five-step path",
+    "stages": [
+      {
+        "name": "Theory",
+        "text": "Understand the basics before writing code."
+      },
+      {
+        "name": "Practice",
+        "text": "Apply each concept through exercises."
+      },
+      {
+        "name": "Project",
+        "text": "Build a complete application."
+      },
+      {
+        "name": "Portfolio",
+        "text": "Gather your work to show it."
+      },
+      {
+        "name": "Career",
+        "text": "Prepare an internship, a job or further studies."
+      }
+    ],
+    "coursesTitle": "Courses",
+    "allCourses": "See all courses",
+    "coursesEmpty": "Courses will be published soon. Write to us to be told when registration opens.",
+    "coursesUnavailable": "The catalogue is temporarily unavailable. Please try again in a moment.",
+    "askUs": "Write to us",
+    "audiencesTitle": "Who is it for?",
+    "audiences": [
+      {
+        "title": "Students",
+        "text": "Strengthen a degree, prepare a project or learn a new language."
+      },
+      {
+        "title": "Young professionals",
+        "text": "Build skills or move towards a digital career."
+      },
+      {
+        "title": "Final-year students",
+        "text": "Get support choosing, designing and building a final-year project (PFE)."
+      }
+    ],
+    "pfeLink": "Discover the PFE support",
+    "faqTitle": "Frequently asked questions"
+  },
+  "Levels": {
+    "BEGINNER": "Beginner",
+    "INTERMEDIATE": "Intermediate",
+    "ADVANCED": "Advanced"
+  },
+  "SessionStatus": {
+    "PLANNED": "Planned",
+    "OPEN": "Registration open",
+    "FULL": "Full",
+    "ONGOING": "In progress",
+    "COMPLETED": "Completed",
+    "CANCELLED": "Cancelled"
+  },
+  "Courses": {
+    "title": "Our courses",
+    "lead": "Pick a course, read its programme and request your registration.",
+    "level": "Level",
+    "duration": "Duration",
+    "price": "Fee",
+    "hours": "{count} h",
+    "categories": "Categories",
+    "all": "All",
+    "search": "Search for a course",
+    "searchButton": "Search",
+    "noResults": "No course matches your search.",
+    "empty": "No course is published yet. They will be added soon.",
+    "unavailable": "The catalogue is temporarily unavailable. Please try again in a moment.",
+    "resetFilters": "Clear filters",
+    "askUs": "Write to us"
+  },
+  "CourseDetail": {
+    "breadcrumb": "Breadcrumb",
+    "backToCourses": "Back to courses",
+    "about": "Overview",
+    "objectives": "Objectives",
+    "prerequisites": "Prerequisites",
+    "program": "Programme",
+    "skills": "Skills covered",
+    "finalProject": "Final project",
+    "practical": "Practical information",
+    "category": "Category",
+    "level": "Level",
+    "duration": "Duration",
+    "hours": "{count} h",
+    "sessionsCount": "Number of sessions",
+    "price": "Fee",
+    "upcomingSessions": "Upcoming sessions",
+    "seatsLeft": "{count, plural, =0 {no seats left} one {# seat left} other {# seats left}}",
+    "requestSession": "Request this session",
+    "noSessions": "No session is scheduled yet. You can still send a registration request.",
+    "register": "Request my registration"
+  },
+  "Registration": {
+    "title": "Registration request",
+    "lead": "Fill in this form and we will get back to you to confirm your place. It is not a payment commitment.",
+    "unavailable": "The form is temporarily unavailable. Please try again in a moment.",
+    "noCourses": "No course is open for registration yet. Write to us to be told when it opens.",
+    "contactUs": "Write to us",
+    "successTitle": "Request received",
+    "successBody": "Thank you, your registration request has been recorded. We will contact you about the next steps.",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "email": "Email address",
+    "phone": "Phone",
+    "age": "Age",
+    "educationLevel": "Education level",
+    "educationLevelHint": "For example: high school diploma, 2nd-year bachelor, 1st-year master.",
+    "institution": "Institution",
+    "course": "Course",
+    "chooseCourse": "Choose a course",
+    "session": "Session",
+    "anySession": "No preference",
+    "noSession": "No session scheduled for this course.",
+    "level": "Your current level",
+    "chooseLevel": "Choose a level",
+    "laptop": "Do you have your own laptop?",
+    "yes": "Yes",
+    "no": "No",
+    "message": "Message",
+    "consent": "I agree that my data may be used to handle my request, as described in the <link>privacy policy</link>.",
+    "submit": "Send my request"
+  },
+  "Pfe": {
+    "title": "Final-year project support",
+    "lead": "Help to take your PFE from idea to defence.",
+    "helpTitle": "What we can offer",
+    "topics": [
+      {
+        "title": "Choose your topic",
+        "text": "Frame a realistic topic with a clear scope."
+      },
+      {
+        "title": "Design",
+        "text": "Architecture, modelling and justified technical choices."
+      },
+      {
+        "title": "Build and defend",
+        "text": "Development, testing, report writing and defence preparation."
+      }
+    ],
+    "terms": "Terms",
+    "pricing": "Fee",
+    "formTitle": "Tell us about your project",
+    "formLead": "Describe your topic in a few lines and we will reply to see how we can help.",
+    "note": "This support complements the supervision of your institution; it does not replace it.",
+    "name": "Full name",
+    "email": "Email address",
+    "phone": "Phone",
+    "topic": "Project topic",
+    "topicHint": "One sentence is enough, for example “a mobile app to manage appointments”.",
+    "message": "Details (technologies, deadlines, needs)",
+    "submit": "Send my request",
+    "successTitle": "Request received",
+    "successBody": "Thank you, we received your request and will get back to you."
+  },
+  "About": {
+    "title": "About",
+    "lead": "An IT training center in Monastir, founded to learn by building.",
+    "approachTitle": "Our approach",
+    "principles": [
+      {
+        "title": "Practice first",
+        "text": "Every concept is followed by exercises and based on real projects."
+      },
+      {
+        "title": "Human-sized groups",
+        "text": "Small rooms so that everyone can be followed closely."
+      },
+      {
+        "title": "A portfolio at the end",
+        "text": "The projects you build become a portfolio you can show."
+      },
+      {
+        "title": "An eye on what comes next",
+        "text": "Internship, job or studies: every path ends with a reflection on the next step."
+      }
+    ],
+    "teamTitle": "The team",
+    "teamLead": "The center was founded by:",
+    "founder": "Founder",
+    "trainers": "Trainers",
+    "certifications": "Certifications",
+    "partners": "Partners",
+    "cta": "Ready to start?",
+    "ctaCourses": "See the courses"
+  },
+  "Contact": {
+    "title": "Contact",
+    "lead": "A question about a course, a schedule or a project? Write to us.",
+    "formTitle": "Send a message",
+    "infoTitle": "Contact details",
+    "map": "Directions",
+    "openMap": "Open the map",
+    "name": "Full name",
+    "email": "Email address",
+    "subject": "Subject",
+    "message": "Message",
+    "submit": "Send the message",
+    "successTitle": "Message sent",
+    "successBody": "Thank you, we received your message."
+  },
+  "Legal": {
+    "title": "Legal notice",
+    "lead": "Information about the publisher of this site.",
+    "draftNotice": "Provisional page: the center's identification details are not filled in yet. The legal content must be validated before going live.",
+    "rows": [
+      "Name of the center",
+      "Legal form",
+      "Registered address",
+      "Registration number (RNE)",
+      "Tax identification number",
+      "Publication director",
+      "Contact email",
+      "Phone",
+      "Website host"
+    ],
+    "ipTitle": "Intellectual property",
+    "ipText": "The texts, graphics and logo of this site belong to their authors. Any reproduction without permission is prohibited."
+  },
+  "Privacy": {
+    "title": "Privacy policy",
+    "lead": "What data we collect, why, and how to exercise your rights.",
+    "draftNotice": "Provisional page: it describes how the site works today and must be legally validated before going live.",
+    "sections": [
+      {
+        "title": "Data controller",
+        "text": "The training center, whose full identity will appear in the legal notice.",
+        "todo": true
+      },
+      {
+        "title": "Data collected",
+        "text": "Registration: last name, first name, email, phone, age, education level, institution, requested course and message.\nContact and PFE: name, email, phone (optional), subject and message.\nAccount: name, email and password, stored only in an irreversibly hashed form."
+      },
+      {
+        "title": "Purposes",
+        "text": "Handling your registration request, answering your messages and managing your account. Data is used only for these purposes."
+      },
+      {
+        "title": "Cookies",
+        "text": "This site only uses strictly necessary cookies: your login session (secure cookies, not readable by scripts) and your language choice. No advertising cookie or analytics tool is installed at this time."
+      },
+      {
+        "title": "Retention period",
+        "text": "The data retention period will be specified before going live.",
+        "todo": true
+      },
+      {
+        "title": "Hosting and processors",
+        "text": "The host and any service providers will be listed before going live.",
+        "todo": true
+      },
+      {
+        "title": "Your rights",
+        "text": "Under Tunisian Organic Law No. 2004-63 of 27 July 2004 on the protection of personal data, you may request access to, correction or deletion of your data, and object to its processing for legitimate reasons. Write to us from the Contact page. You may also contact the National Authority for the Protection of Personal Data (INPDP)."
+      }
+    ]
+  },
+  "Auth": {
+    "email": "Email address",
+    "password": "Password",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "loginTitle": "Log in",
+    "loginLead": "Access your space.",
+    "loginSubmit": "Log in",
+    "loggingIn": "Logging in…",
+    "forgotLink": "Forgot your password?",
+    "noAccount": "No account yet?",
+    "signupLink": "Create an account",
+    "signupTitle": "Create an account",
+    "signupLead": "Enter your details: we send you a link to activate the account and choose your password.",
+    "signupHint": "You will choose your password in the next step, from the link sent by email.",
+    "signupSubmit": "Get the activation link",
+    "signupSuccessTitle": "Check your inbox",
+    "signupSuccessBody": "If the address is valid, an activation link has just been sent to it. It is valid for 72 hours and works once.",
+    "haveAccount": "Already have an account?",
+    "loginLink": "Log in",
+    "forgotTitle": "Forgot your password",
+    "forgotLead": "Enter your email address: if an account exists, we send you a reset link.",
+    "forgotSubmit": "Get the link",
+    "forgotSuccessTitle": "Check your inbox",
+    "forgotSuccessBody": "If an account matches this address, a reset link has just been sent. It is valid for 1 hour.",
+    "backToLogin": "Back to log in",
+    "newPassword": "New password",
+    "confirmPassword": "Confirm password",
+    "passwordRule": "At least 10 characters. A passphrase works very well.",
+    "resetTitle": "New password",
+    "resetLead": "Choose a new password. Your other devices will be logged out.",
+    "resetSubmit": "Save password",
+    "resetSuccessTitle": "Password changed",
+    "resetSuccessBody": "You can now log in with your new password.",
+    "activateTitle": "Activate my account",
+    "activateLead": "Choose your password to activate your account.",
+    "activateSubmit": "Activate my account",
+    "linkInvalid": "This link is invalid, expired or already used.",
+    "requestNewReset": "Request a new link",
+    "requestNewActivation": "Get a new activation link"
+  },
+  "Space": {
+    "title": "Your space",
+    "welcome": "Hello {name}",
+    "email": "Email",
+    "role": "Profile",
+    "comingSoon": "Your dashboard will be available soon.",
+    "logout": "Log out"
+  },
+  "Roles": {
+    "STUDENT": "Student",
+    "TRAINER": "Trainer",
+    "ADMIN": "Administrator"
+  },
+  "Errors": {
+    "field": {
+      "required": "This field is required.",
+      "too_long": "This text is too long.",
+      "invalid_email": "Enter a valid email address.",
+      "invalid_phone": "Enter a valid phone number.",
+      "out_of_range": "This value is outside the allowed range.",
+      "invalid_number": "Enter a whole number.",
+      "invalid_value": "This value is not valid.",
+      "consent_required": "You must agree to continue.",
+      "password_too_short": "The password must be at least 10 characters long.",
+      "password_too_long": "The password is too long (128 characters maximum).",
+      "password_mismatch": "The two passwords do not match.",
+      "invalid_token": "This link is invalid, expired or already used.",
+      "invalid_password": "Incorrect password.",
+      "password_unchanged": "The new password must differ from the old one.",
+      "invalid_id": "This value is not valid.",
+      "invalid_url": "Enter a valid HTTPS link (https://…).",
+      "french_required": "French is required.",
+      "end_before_start": "The end must be after the start."
+    },
+    "api": {
+      "generic": "Something went wrong. Please try again in a moment.",
+      "fix_fields": "Fix the highlighted fields and try again.",
+      "invalid_credentials": "Incorrect email or password.",
+      "rate_limited": "Too many attempts. Wait a few minutes before trying again.",
+      "rate_limited_wait": "Too many attempts. Try again in {minutes, plural, one {# minute} other {# minutes}}.",
+      "service_unavailable": "The service is temporarily unavailable. Please try again in a moment.",
+      "database_unavailable": "The service is temporarily unavailable. Please try again in a moment.",
+      "internal_error": "Something went wrong on our side. Please try again in a moment.",
+      "course_not_found": "This course does not exist or is no longer available.",
+      "registration_already_exists": "A request already exists for this course with this email address.",
+      "session_closed": "This session no longer accepts requests.",
+      "validation_failed": "Fix the highlighted fields and try again.",
+      "unauthenticated": "Your session has expired. Please log in again.",
+      "permission_denied": "You do not have access to this action.",
+      "invalid_token": "This link is invalid, expired or already used.",
+      "not_found": "This item could not be found.",
+      "project_locked": "This project can no longer be edited.",
+      "enrollment_not_active": "Your enrollment is no longer active: the project can no longer be edited.",
+      "event_not_started": "This class has not started yet: attendance cannot be recorded.",
+      "project_not_reviewable": "This project can no longer be reviewed (not submitted or already validated).",
+      "session_full": "This session is full.",
+      "registration_already_decided": "This request has already been processed.",
+      "already_enrolled": "This student is already enrolled in this session.",
+      "email_belongs_to_staff": "This email address belongs to a staff account.",
+      "account_unavailable": "The account linked to this address is suspended or deleted.",
+      "slug_already_used": "This URL identifier is already in use.",
+      "course_has_enrollments": "Not possible: active students are enrolled in this course.",
+      "capacity_below_enrollments": "Capacity cannot be lower than the number of active enrollments.",
+      "event_overlap": "This class overlaps another class of the session.",
+      "event_has_attendance": "Not possible: attendance was already taken for this class.",
+      "email_already_used": "This email address is already in use.",
+      "french_required": "French content is required to publish.",
+      "account_not_activated": "This account is not activated yet.",
+      "certificate_already_issued": "A certificate already exists for this enrollment."
+    },
+    "page": {
+      "title": "Something went wrong",
+      "text": "The page could not be displayed. Try again; if the problem persists, come back later.",
+      "retry": "Try again"
+    },
+    "notFound": {
+      "title": "Page not found",
+      "text": "This page does not exist or has been moved.",
+      "home": "Back to home"
+    }
+  },
+  "Student": {
+    "nav": {
+      "label": "Student area navigation",
+      "dashboard": "Dashboard",
+      "courses": "My courses",
+      "schedule": "Schedule",
+      "projects": "Projects",
+      "certificates": "Certificates",
+      "registrations": "My applications",
+      "payments": "Payments",
+      "notifications": "Notifications",
+      "profile": "My profile",
+      "unread": "{count, plural, one {# unread} other {# unread}}"
+    },
+    "dashboard": {
+      "welcome": "Hello {name}",
+      "lead": "Your progress and your next classes.",
+      "unread": "{count, plural, one {You have # unread notification.} other {You have # unread notifications.}}",
+      "seeNotifications": "View notifications",
+      "myCourses": "My courses",
+      "nextEvents": "Next classes",
+      "fullSchedule": "View full schedule"
+    },
+    "courses": {
+      "lead": "The courses you are enrolled in.",
+      "empty": "You are not enrolled in any course yet.",
+      "browse": "Browse courses",
+      "progress": "Progress"
+    },
+    "schedule": {
+      "lead": "Your upcoming classes.",
+      "empty": "No class scheduled for now.",
+      "roomTbd": "Room to be defined"
+    },
+    "projects": {
+      "lead": "Add your repository link and submit your project to your trainer.",
+      "empty": "No project has been assigned to you yet.",
+      "description": "Description",
+      "repoUrl": "Repository link (HTTPS)",
+      "repoHint": "For example, the link to your GitHub or GitLab repository. http:// links are rejected.",
+      "save": "Save draft",
+      "submit": "Submit project",
+      "submitHint": "Once submitted, the project is locked until your trainer reviews it.",
+      "saved": "Draft saved.",
+      "submitted": "Project submitted. Your trainer will be notified.",
+      "submittedOn": "Submitted on {date}",
+      "trainerFeedback": "Trainer feedback",
+      "grade": "Grade"
+    },
+    "certificates": {
+      "lead": "Certificates issued by the center at the end of your courses.",
+      "empty": "No certificate yet.",
+      "type": "Center course certificate",
+      "issuedOn": "Issued on {date}",
+      "code": "Verification code"
+    },
+    "registrations": {
+      "lead": "Status of your enrollment applications.",
+      "empty": "You have not submitted any application.",
+      "apply": "Submit an application",
+      "sentOn": "Sent on {date}"
+    },
+    "payments": {
+      "lead": "History of payments recorded by the center.",
+      "manualNotice": "Payments are recorded manually by the center's administration. If you have any question, contact us.",
+      "empty": "No payment recorded.",
+      "paidOn": "Paid on {date}",
+      "recordedOn": "Recorded on {date}"
+    },
+    "notifications": {
+      "lead": "Important information about your learning path.",
+      "empty": "No notifications.",
+      "new": "New",
+      "markRead": "Mark as read",
+      "markAll": "Mark all as read",
+      "open": "Open"
+    },
+    "profile": {
+      "lead": "Your personal information.",
+      "email": "Email address (cannot be changed)",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "phone": "Phone",
+      "language": "Preferred language",
+      "languageHint": "Used for emails and course titles.",
+      "save": "Save",
+      "saved": "Profile updated.",
+      "logout": "Log out"
+    },
+    "enrollmentStatus": {
+      "ACTIVE": "In progress",
+      "COMPLETED": "Completed",
+      "DROPPED": "Dropped"
+    },
+    "projectStatus": {
+      "NOT_STARTED": "Not started",
+      "IN_PROGRESS": "In progress",
+      "SUBMITTED": "Submitted",
+      "REVIEWED": "Reviewed — to be revised",
+      "VALIDATED": "Validated"
+    },
+    "paymentStatus": {
+      "UNPAID": "Unpaid",
+      "PARTIAL": "Partial",
+      "PAID": "Paid",
+      "REFUNDED": "Refunded"
+    },
+    "paymentMethod": {
+      "CASH": "Cash",
+      "BANK_TRANSFER": "Bank transfer",
+      "OTHER": "Other"
+    },
+    "registrationStatus": {
+      "PENDING": "Pending",
+      "ACCEPTED": "Accepted",
+      "REJECTED": "Rejected",
+      "WAITLIST": "Waiting list"
+    },
+    "notificationType": {
+      "REGISTRATION_DECISION": "A decision was made on your enrollment application.",
+      "PAYMENT_UPDATE": "Your payment status has been updated.",
+      "PROJECT_REVIEWED": "Your project was reviewed by your trainer.",
+      "CERTIFICATE_ISSUED": "A certificate was issued for you.",
+      "SYSTEM": "Message from the center.",
+      "PROJECT_SUBMITTED": "A student has submitted a project for review."
+    }
+  },
+  "Trainer": {
+    "logout": "Log out",
+    "backToSessions": "My sessions",
+    "backToSession": "Back to session",
+    "enrollmentCompleted": "Completed",
+    "dashboard": {
+      "welcome": "Hello {name}",
+      "lead": "Your sessions, your students and the projects to review.",
+      "mySessions": "My sessions",
+      "empty": "No session is assigned to you yet.",
+      "students": "{count, plural, =0 {No students} one {# student} other {# students}}",
+      "open": "Open session"
+    },
+    "session": {
+      "title": "Session",
+      "lead": "Students, schedule and attendance.",
+      "projectsLink": "View session projects",
+      "students": "Students",
+      "noStudents": "No student is enrolled in this session.",
+      "progress": "Progress",
+      "schedule": "Schedule",
+      "noEvents": "No class scheduled for this session.",
+      "roomTbd": "Room to be defined",
+      "takeAttendance": "Take attendance",
+      "upcoming": "Upcoming"
+    },
+    "attendance": {
+      "title": "Attendance",
+      "pickOne": "Choose at least one status before saving.",
+      "saved": "Attendance saved.",
+      "save": "Save attendance",
+      "note": "Remark",
+      "statusFor": "Attendance of {name}",
+      "status": {
+        "PRESENT": "Present",
+        "ABSENT": "Absent",
+        "LATE": "Late",
+        "EXCUSED": "Excused"
+      }
+    },
+    "projects": {
+      "title": "Session projects",
+      "lead": "Review submitted projects: validate them or ask for corrections.",
+      "empty": "No project for this session.",
+      "notSubmitted": "This student has not submitted this project yet."
+    },
+    "review": {
+      "decision": "Decision",
+      "toFix": "Needs corrections",
+      "validate": "Validate",
+      "feedback": "Feedback",
+      "feedbackHint": "Required if you ask for corrections.",
+      "grade": "Grade out of 20",
+      "gradeHint": "Optional, for example 15 or 15.5.",
+      "save": "Save review",
+      "notifyHint": "The student is notified. A validated project can no longer be edited.",
+      "savedReviewed": "Corrections requested. The student was notified.",
+      "savedValidated": "Project validated. The student was notified."
+    },
+    "notifications": {
+      "title": "Notifications",
+      "lead": "Projects submitted by your students appear here.",
+      "unread": "{count, plural, one {# submitted project is waiting for your review.} other {# submitted projects are waiting for your review.}}",
+      "see": "See notifications",
+      "empty": "No notifications.",
+      "new": "New",
+      "markRead": "Mark as read",
+      "markAll": "Mark all as read",
+      "open": "See the session's projects"
+    }
+  },
+  "Admin": {
+    "logout": "Log out",
+    "nav": {
+      "label": "Administration",
+      "dashboard": "Dashboard",
+      "courses": "Courses",
+      "sessions": "Sessions",
+      "requests": "Requests",
+      "messages": "Messages",
+      "payments": "Payments",
+      "students": "Students",
+      "trainers": "Trainers",
+      "faq": "FAQ",
+      "settings": "Settings"
+    },
+    "pager": {
+      "label": "Pagination",
+      "previous": "Previous",
+      "next": "Next",
+      "page": "Page {page} of {total}"
+    },
+    "filters": {
+      "search": "Search",
+      "status": "Status",
+      "all": "All",
+      "apply": "Filter"
+    },
+    "dashboard": {
+      "welcome": "Hello {name}",
+      "lead": "Overview of the center: registrations, payments and fill rate.",
+      "pendingNotice": "{count, plural, one {# registration request is awaiting a decision.} other {# registration requests are awaiting a decision.}}",
+      "seeRequests": "See requests",
+      "statsTitle": "Key figures",
+      "stat": {
+        "students": "Students",
+        "registrations": "Requests received",
+        "pending": "Pending requests",
+        "courses": "Published courses",
+        "revenue": "Revenue collected (TND)",
+        "fillRate": "Fill rate"
+      },
+      "open": "Open",
+      "statsNote": "Revenue = payments marked “Paid”. Fill rate = seats taken / capacity of open or ongoing sessions.",
+      "demandTitle": "Most requested courses",
+      "demandEmpty": "No requests yet.",
+      "demandCount": "{count, plural, one {# request} other {# requests}}"
+    },
+    "course": {
+      "listTitle": "Courses",
+      "listLead": "Create, edit and publish the catalogue. Only published courses are visible on the site.",
+      "new": "New course",
+      "newTitle": "New course",
+      "newLead": "The course is created as a draft; publish it when the content is ready.",
+      "editTitle": "Edit course",
+      "editLead": "French is required; Arabic and English are optional (French is used as fallback).",
+      "back": "Back to courses",
+      "empty": "No matching course.",
+      "edit": "Edit",
+      "publish": "Publish",
+      "unpublish": "Disable",
+      "toDraft": "Back to draft",
+      "confirmUnpublish": "Disable this course? It will no longer be visible on the site.",
+      "draftNotice": "This course is a draft: it does not appear on the site.",
+      "dangerTitle": "Deletion",
+      "deleteHint": "Deleting removes the course from the site and the admin. Not possible while active students are enrolled.",
+      "delete": "Delete course",
+      "confirmDelete": "Permanently delete this course?",
+      "col": {
+        "title": "Title",
+        "slug": "Slug",
+        "status": "Status",
+        "actions": "Actions"
+      },
+      "status": {
+        "DRAFT": "Draft",
+        "PUBLISHED": "Published",
+        "DISABLED": "Disabled"
+      },
+      "form": {
+        "general": "General information",
+        "slug": "URL identifier",
+        "slugHint": "Lowercase letters, digits and hyphens (e.g. my-course). It appears in the page address.",
+        "category": "Category",
+        "level": "Level",
+        "tbd": "To be defined",
+        "tbdHint": "Leave empty if undecided: the site will show “To be defined”.",
+        "duration": "Duration (hours)",
+        "sessionsCount": "Number of sessions",
+        "price": "Price (TND)",
+        "priceHint": "Enter a price only if it is official (e.g. 120 or 120.500). Empty = “To be defined”.",
+        "lang": {
+          "FR": "French",
+          "AR": "Arabic",
+          "EN": "English"
+        },
+        "optionalLang": "optional",
+        "title": "Title",
+        "summary": "Short summary",
+        "description": "Description",
+        "objectives": "Objectives",
+        "prerequisites": "Prerequisites",
+        "skills": "Target skills",
+        "perLine": "One item per line.",
+        "finalProject": "Final project",
+        "program": "Program",
+        "programHint": "One line = one module; topics start with “- ” (e.g. “Module 1” then “- Variables”).",
+        "create": "Create course",
+        "save": "Save",
+        "saved": "Course saved."
+      }
+    },
+    "session": {
+      "listTitle": "Sessions",
+      "listLead": "Plan sessions, assign a trainer and follow enrollments.",
+      "new": "New session",
+      "newTitle": "New session",
+      "newLead": "A session is a group following a course on given dates.",
+      "back": "Back to sessions",
+      "empty": "No sessions.",
+      "manage": "Manage",
+      "manageTitle": "Manage session",
+      "manageLead": "Status, dates, schedule and enrollments.",
+      "col": {
+        "course": "Course",
+        "dates": "Dates",
+        "seats": "Seats",
+        "status": "Status",
+        "actions": "Actions"
+      },
+      "statusTitle": "Status",
+      "setStatus": "Set to: {status}",
+      "confirmCancel": "Cancel this session?",
+      "editTitle": "Session details",
+      "eventsTitle": "Class schedule",
+      "noEvents": "No class scheduled.",
+      "addEvent": "Add a class",
+      "addEventSubmit": "Add",
+      "eventAdded": "Class added.",
+      "startsAt": "Start",
+      "endsAt": "End",
+      "tzHint": "Tunis time. Two classes of the same session cannot overlap.",
+      "deleteEvent": "Delete",
+      "confirmDeleteEvent": "Remove this class from the schedule?",
+      "enrollmentsTitle": "Enrolled students",
+      "noEnrollments": "No enrolled student. Accept a registration request to add one.",
+      "projectsCount": "{count, plural, =0 {No project} one {# project} other {# projects}}",
+      "certificate": "Certificate:",
+      "manageEnrollment": "Manage this student",
+      "progress": "Progress (%)",
+      "enrollmentStatus": "Enrollment status",
+      "saveEnrollment": "Save",
+      "enrollmentSaved": "Enrollment updated.",
+      "createProject": "Create project",
+      "projectCreated": "Project created.",
+      "projectTitle": "Project title",
+      "projectDescription": "Project description",
+      "recordPayment": "Record payment",
+      "paymentRecorded": "Payment recorded.",
+      "amount": "Amount (TND)",
+      "amountHint": "E.g. 100 or 100.500",
+      "paymentStatus": "Payment status",
+      "method": "Payment method",
+      "reference": "Reference",
+      "paymentNote": "Internal note",
+      "paymentNoteHint": "Never visible to the student.",
+      "issueCertificate": "Issue certificate",
+      "confirmCertificate": "Issue a certificate to this student? Only one certificate per enrollment.",
+      "form": {
+        "course": "Course",
+        "trainer": "Trainer",
+        "tbd": "To be defined",
+        "tbdHint": "Leave empty if undecided.",
+        "label": "Group name",
+        "capacity": "Capacity (seats)",
+        "startDate": "Start date",
+        "endDate": "End date",
+        "scheduleNote": "Schedule (free text)",
+        "scheduleNoteHint": "Only enter confirmed times.",
+        "create": "Create session",
+        "save": "Save",
+        "saved": "Session saved."
+      }
+    },
+    "requests": {
+      "title": "Registration requests",
+      "lead": "Review each request, then accept, waitlist or reject.",
+      "empty": "No requests.",
+      "open": "Review",
+      "col": {
+        "candidate": "Candidate",
+        "course": "Course",
+        "date": "Received",
+        "status": "Status",
+        "actions": "Actions"
+      },
+      "detailTitle": "Registration request",
+      "detailLead": "Candidate file and decision.",
+      "back": "Back to requests",
+      "candidate": "Candidate",
+      "f": {
+        "course": "Course",
+        "email": "Email",
+        "phone": "Phone",
+        "age": "Age",
+        "education": "Education level",
+        "institution": "Institution",
+        "level": "Computing level",
+        "laptop": "Own laptop",
+        "date": "Received on",
+        "message": "Candidate's message",
+        "adminNote": "Internal note"
+      },
+      "yes": "Yes",
+      "no": "No",
+      "decision": "Decision",
+      "acceptHint": "Accepting creates the enrollment and, if needed, the student account (an activation link is sent). No seat is reserved until a decision is made.",
+      "decisionLegend": "Your decision",
+      "accept": "Accept",
+      "waitlist": "Waitlist",
+      "reject": "Reject",
+      "session": "Session",
+      "sessionHint": "Required to accept (if the candidate did not choose one).",
+      "note": "Internal note",
+      "noteHint": "Visible to administrators only.",
+      "submit": "Save decision",
+      "decided": "Decision saved.",
+      "alreadyDecided": "This request has already been processed."
+    },
+    "inbox": {
+      "title": "Inbox",
+      "lead": "Contact form messages and PFE support requests.",
+      "tabs": "Message type",
+      "empty": "No messages.",
+      "tab": {
+        "contact": "Contact",
+        "pfe": "PFE support"
+      },
+      "status": {
+        "NEW": "New",
+        "IN_REVIEW": "In progress",
+        "CLOSED": "Closed"
+      },
+      "mark": {
+        "NEW": "Mark as new",
+        "IN_REVIEW": "Mark in progress",
+        "CLOSED": "Mark closed"
+      }
+    },
+    "payments": {
+      "title": "Payments",
+      "lead": "Payment tracking (cash, bank transfer). No online payment.",
+      "howTo": "To record a payment: open the session, then “Manage this student”.",
+      "empty": "No payments.",
+      "col": {
+        "student": "Student",
+        "course": "Course",
+        "amount": "Amount",
+        "status": "Status",
+        "date": "Date",
+        "actions": "Actions"
+      },
+      "edit": "Edit",
+      "method": "Method",
+      "note": "Internal note",
+      "save": "Save",
+      "saved": "Payment updated."
+    },
+    "students": {
+      "title": "Students",
+      "lead": "Student accounts. Suspending immediately closes all open sessions.",
+      "empty": "No students.",
+      "col": {
+        "name": "Name",
+        "email": "Email",
+        "enrollments": "Enrollments",
+        "status": "Status",
+        "actions": "Actions"
+      },
+      "status": {
+        "PENDING_ACTIVATION": "Pending activation",
+        "ACTIVE": "Active",
+        "SUSPENDED": "Suspended"
+      },
+      "suspend": "Suspend",
+      "reactivate": "Reactivate",
+      "confirmSuspend": "Suspend this account? The student will be logged out."
+    },
+    "trainers": {
+      "title": "Trainers",
+      "lead": "Create trainer accounts and assign them to sessions.",
+      "newTitle": "New trainer",
+      "activationNotice": "An activation link is sent to the email address: the trainer chooses their own password.",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "email": "Email",
+      "specialties": "Specialties",
+      "specialtiesHint": "Separated by commas. Only enter confirmed information.",
+      "bio": "Biography",
+      "bioHint": "Leave empty if not provided.",
+      "create": "Create trainer",
+      "created": "Trainer created: the activation email is sent.",
+      "listTitle": "Teaching team",
+      "empty": "No trainers.",
+      "edit": "Edit",
+      "save": "Save",
+      "saved": "Trainer updated."
+    },
+    "faq": {
+      "title": "FAQ",
+      "lead": "Published questions appear on the site in their language.",
+      "newTitle": "New question",
+      "add": "Add",
+      "saved": "Question saved.",
+      "listTitle": "Existing questions",
+      "empty": "No questions.",
+      "language": "Language",
+      "order": "Order",
+      "orderHint": "Lower = shown higher.",
+      "question": "Question",
+      "answer": "Answer",
+      "visibility": "Visibility",
+      "published": "Published",
+      "hidden": "Hidden",
+      "edit": "Edit",
+      "save": "Save",
+      "delete": "Delete",
+      "confirmDelete": "Delete this question?"
+    },
+    "settings": {
+      "title": "Site settings",
+      "lead": "Contact details and information shown on the public site.",
+      "notice": "Only enter official, confirmed information. An empty value shows “To be defined” on the site.",
+      "currentTodo": "Currently “To be defined”.",
+      "save": "Save",
+      "saved": "Setting saved (visible on the site within a minute).",
+      "emptyMeansTodo": "Clearing a field resets the value to “To be defined”.",
+      "key": {
+        "PROJECT_NAME": "Center name",
+        "PHONE": "Phone",
+        "EMAIL": "Contact email",
+        "ADDRESS": "Address",
+        "OPENING_HOURS": "Opening hours",
+        "CITY": "City",
+        "COUNTRY": "Country"
+      }
+    }
+  }
+}

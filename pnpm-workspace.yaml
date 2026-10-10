@@ -1,0 +1,20 @@
+packages:
+  - "apps/*"
+  - "packages/*"
+
+onlyBuiltDependencies:
+  - esbuild
+  - protobufjs
+  - argon2
+  - "@prisma/engines"
+  - prisma
+
+# Correctif de sécurité : mysql2 n'est tiré que par la CLI Prisma (jamais exécuté, le projet utilise PostgreSQL).
+overrides:
+  mysql2: ">=3.23.1"
+
+auditConfig:
+  ignoreGhsas:
+    # deepmerge-ts < 8 (épuisement de pile sur objets récursifs) : utilisé uniquement par prisma.config.ts,
+    # qui fusionne une configuration écrite par nous, jamais une entrée utilisateur. Monter en v8 casserait @prisma/config.
+    - GHSA-ggr8-5vv4-36mx

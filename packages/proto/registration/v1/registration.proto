@@ -1,0 +1,217 @@
+syntax = "proto3";
+
+package registration.v1;
+
+import "common/v1/common.proto";
+import "google/protobuf/timestamp.proto";
+
+enum RegistrationStatus {
+  REGISTRATION_STATUS_UNSPECIFIED = 0;
+  REGISTRATION_STATUS_PENDING = 1;
+  REGISTRATION_STATUS_ACCEPTED = 2;
+  REGISTRATION_STATUS_REJECTED = 3;
+  REGISTRATION_STATUS_WAITLIST = 4;
+}
+
+enum RegistrationDecision {
+  REGISTRATION_DECISION_UNSPECIFIED = 0;
+  REGISTRATION_DECISION_ACCEPT = 1;
+  REGISTRATION_DECISION_REJECT = 2;
+  REGISTRATION_DECISION_WAITLIST = 3;
+}
+
+// Statut de traitement d'un message reçu (demande PFE, message de contact).
+enum InboxStatus {
+  INBOX_STATUS_UNSPECIFIED = 0;
+  INBOX_STATUS_NEW = 1;
+  INBOX_STATUS_IN_REVIEW = 2;
+  INBOX_STATUS_CLOSED = 3;
+}
+
+message Registration {
+  string id = 1;
+  string first_name = 2;
+  string last_name = 3;
+  string email = 4;
+  string phone = 5;
+  int32 age = 6;
+  string education_level = 7;
+  optional string institution = 8;
+  string course_id = 9;
+  string course_title = 10;
+  optional string session_id = 11;
+  common.v1.CourseLevel level = 12;
+  bool has_own_laptop = 13;
+  optional string message = 14;
+  common.v1.Locale locale = 15;
+  RegistrationStatus status = 16;
+  optional string admin_note = 17;
+  google.protobuf.Timestamp created_at = 18;
+  optional google.protobuf.Timestamp decided_at = 19;
+}
+
+message PfeRequest {
+  string id = 1;
+  string name = 2;
+  string email = 3;
+  optional string phone = 4;
+  string topic = 5;
+  optional string message = 6;
+  InboxStatus status = 7;
+  google.protobuf.Timestamp created_at = 8;
+}
+
+message ContactMessage {
+  string id = 1;
+  string name = 2;
+  string email = 3;
+  string subject = 4;
+  string message = 5;
+  InboxStatus status = 6;
+  google.protobuf.Timestamp created_at = 7;
+}
+
+service RegistrationService {
+  // ---- Public (sans compte, limité en débit) — Phase 4 : implémenté ----
+  rpc SubmitRegistration(SubmitRegistrationRequest) returns (SubmitRegistrationResponse);
+  rpc RequestPfeSupport(RequestPfeSupportRequest) returns (RequestPfeSupportResponse);
+  rpc SubmitContactMessage(SubmitContactMessageRequest) returns (SubmitContactMessageResponse);
+
+  // ---- Administration (rôle ADMIN) — Phase 9 ----
+  rpc ListRegistrations(ListRegistrationsRequest) returns (ListRegistrationsResponse);
+  rpc GetRegistration(GetRegistrationRequest) returns (GetRegistrationResponse);
+  // Accepter crée le compte étudiant + l'inscription à la session et envoie un lien d'activation.
+  rpc DecideRegistration(DecideRegistrationRequest) returns (DecideRegistrationResponse);
+  rpc ListPfeRequests(ListPfeRequestsRequest) returns (ListPfeRequestsResponse);
+  rpc SetPfeRequestStatus(SetPfeRequestStatusRequest) returns (SetPfeRequestStatusResponse);
+  rpc ListContactMessages(ListContactMessagesRequest) returns (ListContactMessagesResponse);
+  rpc SetContactMessageStatus(SetContactMessageStatusRequest) returns (SetContactMessageStatusResponse);
+}
+
+message SubmitRegistrationRequest {
+  string first_name = 1;
+  string last_name = 2;
+  string email = 3;
+  string phone = 4;
+  int32 age = 5;
+  string education_level = 6;
+  optional string institution = 7;
+  // Slug de la formation (celle de l'URL /formations/[slug]).
+  string course_slug = 8;
+  optional string session_id = 9;
+  // Niveau informatique déclaré par le candidat.
+  common.v1.CourseLevel level = 10;
+  bool has_own_laptop = 11;
+  optional string message = 12;
+  // Doit être vrai. La date de consentement est enregistrée par le SERVEUR.
+  bool consent_given = 13;
+  common.v1.Locale locale = 14;
+}
+
+message SubmitRegistrationResponse {
+  string registration_id = 1;
+  // PENDING, ou WAITLIST si la session demandée est complète.
+  RegistrationStatus status = 2;
+  google.protobuf.Timestamp received_at = 3;
+}
+
+message RequestPfeSupportRequest {
+  string name = 1;
+  string email = 2;
+  optional string phone = 3;
+  string topic = 4;
+  optional string message = 5;
+  bool consent_given = 6;
+}
+
+message RequestPfeSupportResponse {
+  string request_id = 1;
+  google.protobuf.Timestamp received_at = 2;
+}
+
+message SubmitContactMessageRequest {
+  string name = 1;
+  string email = 2;
+  string subject = 3;
+  string message = 4;
+  bool consent_given = 5;
+}
+
+message SubmitContactMessageResponse {
+  string message_id = 1;
+  google.protobuf.Timestamp received_at = 2;
+}
+
+message ListRegistrationsRequest {
+  optional RegistrationStatus status = 1;
+  optional string course_id = 2;
+  optional string session_id = 3;
+  optional string query = 4;
+  common.v1.PageRequest page = 5;
+  common.v1.Locale locale = 6;
+}
+
+message ListRegistrationsResponse {
+  repeated Registration registrations = 1;
+  common.v1.PageInfo page_info = 2;
+}
+
+message GetRegistrationRequest {
+  string id = 1;
+  common.v1.Locale locale = 2;
+}
+
+message GetRegistrationResponse {
+  Registration registration = 1;
+}
+
+message DecideRegistrationRequest {
+  string id = 1;
+  RegistrationDecision decision = 2;
+  // Session à laquelle rattacher l'étudiant (obligatoire pour accepter si la demande n'en avait pas).
+  optional string session_id = 3;
+  optional string admin_note = 4;
+  common.v1.Locale locale = 5;
+}
+
+message DecideRegistrationResponse {
+  Registration registration = 1;
+}
+
+message ListPfeRequestsRequest {
+  optional InboxStatus status = 1;
+  common.v1.PageRequest page = 2;
+}
+
+message ListPfeRequestsResponse {
+  repeated PfeRequest requests = 1;
+  common.v1.PageInfo page_info = 2;
+}
+
+message SetPfeRequestStatusRequest {
+  string id = 1;
+  InboxStatus status = 2;
+}
+
+message SetPfeRequestStatusResponse {
+  PfeRequest request = 1;
+}
+
+message ListContactMessagesRequest {
+  optional InboxStatus status = 1;
+  common.v1.PageRequest page = 2;
+}
+
+message ListContactMessagesResponse {
+  repeated ContactMessage messages = 1;
+  common.v1.PageInfo page_info = 2;
+}
+
+message SetContactMessageStatusRequest {
+  string id = 1;
+  InboxStatus status = 2;
+}
+
+message SetContactMessageStatusResponse {
+  ContactMessage message = 1;
+}

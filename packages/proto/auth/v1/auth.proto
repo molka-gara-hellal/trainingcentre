@@ -1,0 +1,109 @@
+syntax = "proto3";
+
+package auth.v1;
+
+import "common/v1/common.proto";
+import "google/protobuf/timestamp.proto";
+import "user/v1/user.proto";
+
+// Les tokens transitent entre le serveur Next.js (BFF) et l'API.
+// Le BFF les place dans des cookies httpOnly : ils ne sont jamais exposés au JavaScript du navigateur.
+message TokenPair {
+  string access_token = 1;
+  string refresh_token = 2;
+  google.protobuf.Timestamp access_expires_at = 3;
+  google.protobuf.Timestamp refresh_expires_at = 4;
+}
+
+// Phase 5 : argon2id, JWT d'accès courts, refresh tokens à usage unique (rotation + détection de rejeu).
+service AuthService {
+  // Demande d'ouverture de compte : AUCUN mot de passe n'est reçu ni stocké à ce stade. Un lien d'activation
+  // est envoyé par e-mail ; le mot de passe se définit à l'activation (preuve que l'adresse appartient à la
+  // personne). Répond toujours par un succès, que l'e-mail existe ou non (pas d'énumération de comptes).
+  rpc Register(RegisterRequest) returns (RegisterResponse);
+  // Activation d'un compte créé à l'acceptation d'une inscription (définition du mot de passe).
+  rpc ActivateAccount(ActivateAccountRequest) returns (ActivateAccountResponse);
+  rpc Login(LoginRequest) returns (LoginResponse);
+  rpc Logout(LogoutRequest) returns (LogoutResponse);
+  rpc RefreshToken(RefreshTokenRequest) returns (RefreshTokenResponse);
+  // Répond toujours par un succès, que l'e-mail existe ou non (pas d'énumération de comptes).
+  rpc ForgotPassword(ForgotPasswordRequest) returns (ForgotPasswordResponse);
+  rpc ResetPassword(ResetPasswordRequest) returns (ResetPasswordResponse);
+  rpc ChangePassword(ChangePasswordRequest) returns (ChangePasswordResponse);
+  rpc GetMe(GetMeRequest) returns (GetMeResponse);
+}
+
+message RegisterRequest {
+  reserved 2;
+  reserved "password";
+  string email = 1;
+  string first_name = 3;
+  string last_name = 4;
+  common.v1.Locale locale = 5;
+}
+
+message RegisterResponse {
+  reserved 1;
+  reserved "user";
+}
+
+message ActivateAccountRequest {
+  string token = 1;
+  string password = 2;
+}
+
+message ActivateAccountResponse {
+  user.v1.User user = 1;
+  TokenPair tokens = 2;
+}
+
+message LoginRequest {
+  string email = 1;
+  string password = 2;
+}
+
+message LoginResponse {
+  user.v1.User user = 1;
+  TokenPair tokens = 2;
+}
+
+message LogoutRequest {
+  string refresh_token = 1;
+}
+
+message LogoutResponse {}
+
+message RefreshTokenRequest {
+  string refresh_token = 1;
+}
+
+message RefreshTokenResponse {
+  TokenPair tokens = 1;
+}
+
+message ForgotPasswordRequest {
+  string email = 1;
+  common.v1.Locale locale = 2;
+}
+
+message ForgotPasswordResponse {}
+
+message ResetPasswordRequest {
+  string token = 1;
+  string new_password = 2;
+}
+
+message ResetPasswordResponse {}
+
+message ChangePasswordRequest {
+  string current_password = 1;
+  string new_password = 2;
+}
+
+message ChangePasswordResponse {}
+
+message GetMeRequest {}
+
+message GetMeResponse {
+  user.v1.User user = 1;
+}

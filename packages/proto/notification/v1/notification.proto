@@ -1,0 +1,62 @@
+syntax = "proto3";
+
+package notification.v1;
+
+import "google/protobuf/timestamp.proto";
+
+enum NotificationType {
+  NOTIFICATION_TYPE_UNSPECIFIED = 0;
+  NOTIFICATION_TYPE_NEW_REGISTRATION = 1;
+  NOTIFICATION_TYPE_REGISTRATION_DECISION = 2;
+  NOTIFICATION_TYPE_NEW_PFE_REQUEST = 3;
+  NOTIFICATION_TYPE_NEW_CONTACT_MESSAGE = 4;
+  NOTIFICATION_TYPE_PAYMENT_UPDATE = 5;
+  NOTIFICATION_TYPE_PROJECT_REVIEWED = 6;
+  NOTIFICATION_TYPE_CERTIFICATE_ISSUED = 7;
+  NOTIFICATION_TYPE_SYSTEM = 8;
+  NOTIFICATION_TYPE_PROJECT_SUBMITTED = 9;
+}
+
+message Notification {
+  string id = 1;
+  NotificationType type = 2;
+  // Données de la notification au format JSON (ex. identifiant de l'inscription concernée).
+  string payload_json = 3;
+  optional google.protobuf.Timestamp read_at = 4;
+  google.protobuf.Timestamp created_at = 5;
+}
+
+// Notifications de l'utilisateur connecté (et celles adressées à son rôle, ex. ADMIN). Phase 7.
+// La création des notifications et l'envoi d'e-mails sont internes à l'API (pas de RPC public).
+service NotificationService {
+  rpc ListMyNotifications(ListMyNotificationsRequest) returns (ListMyNotificationsResponse);
+  rpc CountMyUnread(CountMyUnreadRequest) returns (CountMyUnreadResponse);
+  rpc MarkNotificationRead(MarkNotificationReadRequest) returns (MarkNotificationReadResponse);
+  rpc MarkAllNotificationsRead(MarkAllNotificationsReadRequest) returns (MarkAllNotificationsReadResponse);
+}
+
+message ListMyNotificationsRequest {
+  bool unread_only = 1;
+  // Maximum de résultats (défaut 20, maximum 100).
+  int32 limit = 2;
+}
+
+message ListMyNotificationsResponse {
+  repeated Notification notifications = 1;
+}
+
+message CountMyUnreadRequest {}
+
+message CountMyUnreadResponse {
+  int32 count = 1;
+}
+
+message MarkNotificationReadRequest {
+  string id = 1;
+}
+
+message MarkNotificationReadResponse {}
+
+message MarkAllNotificationsReadRequest {}
+
+message MarkAllNotificationsReadResponse {}

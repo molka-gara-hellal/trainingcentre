@@ -1,0 +1,28 @@
+# Base de données PostgreSQL pour le DÉVELOPPEMENT LOCAL uniquement.
+# Les identifiants par défaut ci-dessous ne sont valables que pour le poste de dev : en production,
+# utiliser de vrais secrets via variables d'environnement (jamais committées).
+# Projet distinct de la pile de production (docker-compose.prod.yml) : volumes et conteneurs séparés.
+name: training-center-dev
+
+services:
+  db:
+    image: postgres:17-alpine
+    container_name: center-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-center}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-center_dev_only}
+      POSTGRES_DB: ${POSTGRES_DB:-center}
+    ports:
+      # Port hôte configurable via POSTGRES_PORT (défaut 5433) ; accessible seulement depuis ta machine
+      - "127.0.0.1:${POSTGRES_PORT:-5433}:5432"
+    volumes:
+      - center_db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER:-center} -d $${POSTGRES_DB:-center}"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+volumes:
+  center_db_data:

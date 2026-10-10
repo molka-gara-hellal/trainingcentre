@@ -1,0 +1,98 @@
+syntax = "proto3";
+
+package payment.v1;
+
+import "common/v1/common.proto";
+import "google/protobuf/timestamp.proto";
+
+enum PaymentStatus {
+  PAYMENT_STATUS_UNSPECIFIED = 0;
+  PAYMENT_STATUS_UNPAID = 1;
+  PAYMENT_STATUS_PARTIAL = 2;
+  PAYMENT_STATUS_PAID = 3;
+  PAYMENT_STATUS_REFUNDED = 4;
+}
+
+enum PaymentMethod {
+  PAYMENT_METHOD_UNSPECIFIED = 0;
+  PAYMENT_METHOD_CASH = 1;
+  PAYMENT_METHOD_BANK_TRANSFER = 2;
+  PAYMENT_METHOD_OTHER = 3;
+}
+
+// Une ligne = un versement. Suivi manuel (espèces / virement) au lancement.
+message Payment {
+  string id = 1;
+  string enrollment_id = 2;
+  // Montant en dinars tunisiens, 3 décimales, sous forme de texte (ex. "120.000").
+  string amount = 3;
+  string currency = 4;
+  PaymentStatus status = 5;
+  optional PaymentMethod method = 6;
+  optional string reference = 7;
+  optional string note = 8;
+  optional google.protobuf.Timestamp paid_at = 9;
+  google.protobuf.Timestamp created_at = 10;
+}
+
+// Un versement avec l'étudiant et la formation concernés (vue administration).
+message PaymentRow {
+  Payment payment = 1;
+  string first_name = 2;
+  string last_name = 3;
+  string email = 4;
+  string course_title = 5;
+}
+
+// Administration uniquement (rôle ADMIN). Phase 9.
+service PaymentService {
+  rpc RecordPayment(RecordPaymentRequest) returns (RecordPaymentResponse);
+  rpc UpdatePaymentStatus(UpdatePaymentStatusRequest) returns (UpdatePaymentStatusResponse);
+  rpc ListPayments(ListPaymentsRequest) returns (ListPaymentsResponse);
+  rpc GetEnrollmentPaymentHistory(GetEnrollmentPaymentHistoryRequest) returns (GetEnrollmentPaymentHistoryResponse);
+}
+
+message RecordPaymentRequest {
+  string enrollment_id = 1;
+  string amount = 2;
+  PaymentStatus status = 3;
+  optional PaymentMethod method = 4;
+  optional string reference = 5;
+  optional string note = 6;
+  optional google.protobuf.Timestamp paid_at = 7;
+}
+
+message RecordPaymentResponse {
+  Payment payment = 1;
+}
+
+message UpdatePaymentStatusRequest {
+  string id = 1;
+  PaymentStatus status = 2;
+  optional PaymentMethod method = 3;
+  optional string note = 4;
+}
+
+message UpdatePaymentStatusResponse {
+  Payment payment = 1;
+}
+
+message ListPaymentsRequest {
+  optional PaymentStatus status = 1;
+  optional string session_id = 2;
+  common.v1.PageRequest page = 3;
+  common.v1.Locale locale = 4;
+}
+
+message ListPaymentsResponse {
+  repeated PaymentRow payments = 1;
+  common.v1.PageInfo page_info = 2;
+}
+
+message GetEnrollmentPaymentHistoryRequest {
+  string enrollment_id = 1;
+}
+
+message GetEnrollmentPaymentHistoryResponse {
+  repeated Payment payments = 1;
+}

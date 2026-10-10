@@ -1,0 +1,14 @@
+# Reverse proxy HTTPS. Certificats Let's Encrypt obtenus et renouvelés automatiquement.
+# Caddy REMPLACE X-Forwarded-For par l'IP réelle du visiteur (aucun proxy amont de confiance déclaré) :
+# c'est ce qui rend TRUSTED_PROXY_HOPS=1 sûr côté site.
+{$SITE_DOMAIN} {
+	encode zstd gzip
+	reverse_proxy web:3000 {
+		health_uri /api/health
+		health_interval 15s
+	}
+	log {
+		output stdout
+		format json
+	}
+}

@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package common.v1;
+
+// Langues du site. Le français est la langue de repli.
+enum Locale {
+  LOCALE_UNSPECIFIED = 0;
+  LOCALE_FR = 1;
+  LOCALE_AR = 2;
+  LOCALE_EN = 3;
+}
+
+enum CourseLevel {
+  COURSE_LEVEL_UNSPECIFIED = 0;
+  COURSE_LEVEL_BEGINNER = 1;
+  COURSE_LEVEL_INTERMEDIATE = 2;
+  COURSE_LEVEL_ADVANCED = 3;
+}
+
+enum Role {
+  ROLE_UNSPECIFIED = 0;
+  ROLE_STUDENT = 1;
+  ROLE_TRAINER = 2;
+  ROLE_ADMIN = 3;
+}
+
+// Pagination par numéro de page (commence à 1). Valeurs par défaut appliquées côté serveur.
+message PageRequest {
+  int32 page = 1;
+  int32 page_size = 2;
+}
+
+message PageInfo {
+  int32 page = 1;
+  int32 page_size = 2;
+  int32 total_items = 3;
+  int32 total_pages = 4;
+}

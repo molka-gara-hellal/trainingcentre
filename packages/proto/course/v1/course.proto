@@ -1,0 +1,378 @@
+syntax = "proto3";
+
+package course.v1;
+
+import "common/v1/common.proto";
+import "google/protobuf/timestamp.proto";
+import "learning/v1/learning.proto";
+
+enum CourseStatus {
+  COURSE_STATUS_UNSPECIFIED = 0;
+  COURSE_STATUS_DRAFT = 1;
+  COURSE_STATUS_PUBLISHED = 2;
+  COURSE_STATUS_DISABLED = 3;
+}
+
+enum SessionStatus {
+  SESSION_STATUS_UNSPECIFIED = 0;
+  SESSION_STATUS_PLANNED = 1;
+  SESSION_STATUS_OPEN = 2;
+  SESSION_STATUS_FULL = 3;
+  SESSION_STATUS_ONGOING = 4;
+  SESSION_STATUS_COMPLETED = 5;
+  SESSION_STATUS_CANCELLED = 6;
+}
+
+message ProgramModule {
+  string title = 1;
+  repeated string topics = 2;
+}
+
+message CourseCategory {
+  string id = 1;
+  string slug = 2;
+  string name = 3;
+}
+
+// Vue publique d'une formation, dans une langue donnée (repli sur le français).
+// Un champ absent (optional non renseigné) = "À définir" côté interface. On n'invente jamais de valeur.
+message Course {
+  string id = 1;
+  string slug = 2;
+  CourseCategory category = 3;
+  string title = 4;
+  optional string summary = 5;
+  optional string description = 6;
+  optional common.v1.CourseLevel level = 7;
+  optional int32 duration_hours = 8;
+  optional int32 sessions_count = 9;
+  // Dinars tunisiens, 3 décimales, sous forme de texte (ex. "120.000"). Absent = "À définir".
+  optional string price_tnd = 10;
+  CourseStatus status = 11;
+  repeated string objectives = 12;
+  repeated string prerequisites = 13;
+  repeated string skills = 14;
+  optional string final_project = 15;
+  repeated ProgramModule program = 16;
+  // Langue effectivement servie (peut différer de la langue demandée en cas de repli).
+  common.v1.Locale locale = 17;
+  google.protobuf.Timestamp updated_at = 18;
+}
+
+message CourseSession {
+  string id = 1;
+  string course_id = 2;
+  string course_slug = 3;
+  string course_title = 4;
+  optional string label = 5;
+  // Dates au format ISO "AAAA-MM-JJ".
+  optional string start_date = 6;
+  optional string end_date = 7;
+  optional string schedule_note = 8;
+  optional int32 capacity = 9;
+  int32 seats_taken = 10;
+  optional int32 seats_left = 11;
+  SessionStatus status = 12;
+  optional string trainer_name = 13;
+  optional string room_name = 14;
+  // Identifiants renseignés uniquement dans les réponses d'administration (édition d'une session).
+  optional string trainer_id = 15;
+  optional string room_id = 16;
+}
+
+message Faq {
+  string id = 1;
+  string question = 2;
+  string answer = 3;
+}
+
+// Contenu d'une formation dans UNE langue (saisie en administration).
+message CourseTranslationInput {
+  common.v1.Locale locale = 1;
+  string title = 2;
+  optional string summary = 3;
+  optional string description = 4;
+  repeated string objectives = 5;
+  repeated string prerequisites = 6;
+  repeated string skills = 7;
+  optional string final_project = 8;
+  repeated ProgramModule program = 9;
+}
+
+// Vue administration : toutes les langues, y compris brouillons.
+message AdminCourse {
+  string id = 1;
+  string slug = 2;
+  string category_id = 3;
+  optional common.v1.CourseLevel level = 4;
+  optional int32 duration_hours = 5;
+  optional int32 sessions_count = 6;
+  optional string price_tnd = 7;
+  CourseStatus status = 8;
+  repeated CourseTranslationInput translations = 9;
+  google.protobuf.Timestamp created_at = 10;
+  google.protobuf.Timestamp updated_at = 11;
+}
+
+message SessionInput {
+  string course_id = 1;
+  optional string trainer_id = 2;
+  optional string room_id = 3;
+  optional string label = 4;
+  optional string start_date = 5;
+  optional string end_date = 6;
+  optional string schedule_note = 7;
+  optional int32 capacity = 8;
+}
+
+service CourseService {
+  // ---- Public (lecture seule, formations PUBLIÉES uniquement) — Phase 4 : implémenté ----
+  rpc ListCategories(ListCategoriesRequest) returns (ListCategoriesResponse);
+  rpc ListCourses(ListCoursesRequest) returns (ListCoursesResponse);
+  rpc GetCourse(GetCourseRequest) returns (GetCourseResponse);
+  rpc ListUpcomingSessions(ListUpcomingSessionsRequest) returns (ListUpcomingSessionsResponse);
+  rpc ListFaqs(ListFaqsRequest) returns (ListFaqsResponse);
+
+  // ---- Administration (rôle ADMIN) — Phase 9 ----
+  rpc ListAdminCourses(ListAdminCoursesRequest) returns (ListAdminCoursesResponse);
+  rpc GetAdminCourse(GetAdminCourseRequest) returns (GetAdminCourseResponse);
+  rpc CreateCourse(CreateCourseRequest) returns (CreateCourseResponse);
+  rpc UpdateCourse(UpdateCourseRequest) returns (UpdateCourseResponse);
+  rpc DeleteCourse(DeleteCourseRequest) returns (DeleteCourseResponse);
+  rpc SetCourseStatus(SetCourseStatusRequest) returns (SetCourseStatusResponse);
+  rpc ListAdminSessions(ListAdminSessionsRequest) returns (ListAdminSessionsResponse);
+  rpc GetAdminSession(GetAdminSessionRequest) returns (GetAdminSessionResponse);
+  rpc CreateSession(CreateSessionRequest) returns (CreateSessionResponse);
+  rpc UpdateSession(UpdateSessionRequest) returns (UpdateSessionResponse);
+  rpc SetSessionStatus(SetSessionStatusRequest) returns (SetSessionStatusResponse);
+  rpc ListSessionEvents(ListSessionEventsRequest) returns (ListSessionEventsResponse);
+  rpc AddScheduleEvent(AddScheduleEventRequest) returns (AddScheduleEventResponse);
+  rpc DeleteScheduleEvent(DeleteScheduleEventRequest) returns (DeleteScheduleEventResponse);
+  rpc ListAdminFaqs(ListAdminFaqsRequest) returns (ListAdminFaqsResponse);
+  rpc UpsertFaq(UpsertFaqRequest) returns (UpsertFaqResponse);
+  rpc DeleteFaq(DeleteFaqRequest) returns (DeleteFaqResponse);
+}
+
+message ListCategoriesRequest {
+  common.v1.Locale locale = 1;
+}
+
+message ListCategoriesResponse {
+  repeated CourseCategory categories = 1;
+}
+
+message ListCoursesRequest {
+  common.v1.Locale locale = 1;
+  optional string category_slug = 2;
+  // Recherche dans le titre (insensible à la casse).
+  optional string query = 3;
+  common.v1.PageRequest page = 4;
+}
+
+message ListCoursesResponse {
+  repeated Course courses = 1;
+  common.v1.PageInfo page_info = 2;
+}
+
+message GetCourseRequest {
+  string slug = 1;
+  common.v1.Locale locale = 2;
+}
+
+message GetCourseResponse {
+  Course course = 1;
+  // Prochaines sessions (groupes) de cette formation : dates, horaires, places, formateur.
+  repeated CourseSession upcoming_sessions = 2;
+}
+
+message ListUpcomingSessionsRequest {
+  common.v1.Locale locale = 1;
+  optional string course_slug = 2;
+  // Maximum de résultats (défaut 20, maximum 50).
+  int32 limit = 3;
+}
+
+message ListUpcomingSessionsResponse {
+  repeated CourseSession sessions = 1;
+}
+
+message ListFaqsRequest {
+  common.v1.Locale locale = 1;
+}
+
+message ListFaqsResponse {
+  repeated Faq faqs = 1;
+}
+
+message ListAdminCoursesRequest {
+  optional CourseStatus status = 1;
+  optional string query = 2;
+  common.v1.PageRequest page = 3;
+}
+
+message ListAdminCoursesResponse {
+  repeated AdminCourse courses = 1;
+  common.v1.PageInfo page_info = 2;
+}
+
+message GetAdminCourseRequest {
+  string id = 1;
+}
+
+message GetAdminCourseResponse {
+  AdminCourse course = 1;
+}
+
+message CreateCourseRequest {
+  string slug = 1;
+  string category_id = 2;
+  optional common.v1.CourseLevel level = 3;
+  optional int32 duration_hours = 4;
+  optional int32 sessions_count = 5;
+  optional string price_tnd = 6;
+  // Le français est obligatoire ; arabe et anglais sont optionnels.
+  repeated CourseTranslationInput translations = 7;
+}
+
+message CreateCourseResponse {
+  AdminCourse course = 1;
+}
+
+// Remplacement complet (sémantique PUT).
+message UpdateCourseRequest {
+  string id = 1;
+  string slug = 2;
+  string category_id = 3;
+  optional common.v1.CourseLevel level = 4;
+  optional int32 duration_hours = 5;
+  optional int32 sessions_count = 6;
+  optional string price_tnd = 7;
+  repeated CourseTranslationInput translations = 8;
+}
+
+message UpdateCourseResponse {
+  AdminCourse course = 1;
+}
+
+// Suppression douce (deletedAt).
+message DeleteCourseRequest {
+  string id = 1;
+}
+
+message DeleteCourseResponse {}
+
+message SetCourseStatusRequest {
+  string id = 1;
+  CourseStatus status = 2;
+}
+
+message SetCourseStatusResponse {
+  AdminCourse course = 1;
+}
+
+message ListAdminSessionsRequest {
+  optional string course_id = 1;
+  optional SessionStatus status = 2;
+  common.v1.PageRequest page = 3;
+}
+
+message ListAdminSessionsResponse {
+  repeated CourseSession sessions = 1;
+  common.v1.PageInfo page_info = 2;
+}
+
+message GetAdminSessionRequest {
+  string id = 1;
+}
+
+message GetAdminSessionResponse {
+  CourseSession session = 1;
+}
+
+message CreateSessionRequest {
+  SessionInput session = 1;
+}
+
+message CreateSessionResponse {
+  CourseSession session = 1;
+}
+
+message UpdateSessionRequest {
+  string id = 1;
+  SessionInput session = 2;
+}
+
+message UpdateSessionResponse {
+  CourseSession session = 1;
+}
+
+message SetSessionStatusRequest {
+  string id = 1;
+  SessionStatus status = 2;
+}
+
+message SetSessionStatusResponse {
+  CourseSession session = 1;
+}
+
+message UpsertFaqRequest {
+  // Absent = création.
+  optional string id = 1;
+  common.v1.Locale locale = 2;
+  string question = 3;
+  string answer = 4;
+  int32 sort_order = 5;
+  bool published = 6;
+}
+
+message UpsertFaqResponse {
+  Faq faq = 1;
+}
+
+message DeleteFaqRequest {
+  string id = 1;
+}
+
+message DeleteFaqResponse {}
+
+// Emploi du temps d'une session (administration) : les cours que verront étudiants et formateur.
+message ListSessionEventsRequest {
+  string session_id = 1;
+  common.v1.Locale locale = 2;
+}
+
+message ListSessionEventsResponse {
+  repeated learning.v1.ScheduleEvent events = 1;
+}
+
+message AddScheduleEventRequest {
+  string session_id = 1;
+  google.protobuf.Timestamp starts_at = 2;
+  google.protobuf.Timestamp ends_at = 3;
+}
+
+message AddScheduleEventResponse {
+  learning.v1.ScheduleEvent event = 1;
+}
+
+message DeleteScheduleEventRequest {
+  string id = 1;
+}
+
+message DeleteScheduleEventResponse {}
+
+// FAQ vue administration : toutes les langues, publiées ou non.
+message AdminFaq {
+  string id = 1;
+  common.v1.Locale locale = 2;
+  string question = 3;
+  string answer = 4;
+  int32 sort_order = 5;
+  bool published = 6;
+}
+
+message ListAdminFaqsRequest {}
+
+message ListAdminFaqsResponse {
+  repeated AdminFaq faqs = 1;
+}

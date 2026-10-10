@@ -1,0 +1,88 @@
+syntax = "proto3";
+
+package learning.v1;
+
+import "google/protobuf/timestamp.proto";
+
+// Types partagés par les espaces étudiant et formateur (pas de service ici).
+
+enum EnrollmentStatus {
+  ENROLLMENT_STATUS_UNSPECIFIED = 0;
+  ENROLLMENT_STATUS_ACTIVE = 1;
+  ENROLLMENT_STATUS_COMPLETED = 2;
+  ENROLLMENT_STATUS_DROPPED = 3;
+}
+
+enum AttendanceStatus {
+  ATTENDANCE_STATUS_UNSPECIFIED = 0;
+  ATTENDANCE_STATUS_PRESENT = 1;
+  ATTENDANCE_STATUS_ABSENT = 2;
+  ATTENDANCE_STATUS_LATE = 3;
+  ATTENDANCE_STATUS_EXCUSED = 4;
+}
+
+enum ProjectStatus {
+  PROJECT_STATUS_UNSPECIFIED = 0;
+  PROJECT_STATUS_NOT_STARTED = 1;
+  PROJECT_STATUS_IN_PROGRESS = 2;
+  PROJECT_STATUS_SUBMITTED = 3;
+  PROJECT_STATUS_REVIEWED = 4;
+  PROJECT_STATUS_VALIDATED = 5;
+}
+
+// Uniquement des attestations émises par le centre.
+// Une certification tierce ne sera ajoutée qu'après confirmation officielle du partenariat.
+enum CertificateType {
+  CERTIFICATE_TYPE_UNSPECIFIED = 0;
+  CERTIFICATE_TYPE_ATTESTATION = 1;
+}
+
+message Enrollment {
+  string id = 1;
+  string student_id = 2;
+  string session_id = 3;
+  string course_slug = 4;
+  string course_title = 5;
+  optional string session_label = 6;
+  EnrollmentStatus status = 7;
+  int32 progress_pct = 8;
+}
+
+message ScheduleEvent {
+  string id = 1;
+  string session_id = 2;
+  string course_title = 3;
+  google.protobuf.Timestamp starts_at = 4;
+  google.protobuf.Timestamp ends_at = 5;
+  optional string room_name = 6;
+}
+
+message AttendanceRecord {
+  string enrollment_id = 1;
+  AttendanceStatus status = 2;
+  optional string note = 3;
+}
+
+message Project {
+  string id = 1;
+  string enrollment_id = 2;
+  string title = 3;
+  optional string description = 4;
+  optional string repo_url = 5;
+  ProjectStatus status = 6;
+  optional string feedback = 7;
+  // Note sur 20, texte à 2 décimales (ex. "15.50").
+  optional string grade = 8;
+  optional google.protobuf.Timestamp submitted_at = 9;
+  optional google.protobuf.Timestamp reviewed_at = 10;
+}
+
+message Certificate {
+  string id = 1;
+  string enrollment_id = 2;
+  string course_title = 3;
+  CertificateType type = 4;
+  // Code unique de vérification affiché sur le document.
+  string code = 5;
+  google.protobuf.Timestamp issued_at = 6;
+}

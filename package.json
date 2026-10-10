@@ -1,0 +1,42 @@
+{
+  "name": "training-center",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Plateforme web d'un centre privé de formation informatique (Monastir). Nom du projet : TODO",
+  "packageManager": "pnpm@10.34.6",
+  "engines": {
+    "node": ">=22.12"
+  },
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "typecheck": "turbo run typecheck",
+    "lint": "eslint .",
+    "test": "turbo run test",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "db:up": "docker compose -f docker-compose.dev.yml up -d",
+    "db:down": "docker compose -f docker-compose.dev.yml down",
+    "db:generate": "pnpm --filter @center/api db:generate",
+    "db:migrate": "pnpm --filter @center/api db:migrate",
+    "db:seed": "pnpm --filter @center/api db:seed",
+    "db:studio": "pnpm --filter @center/api db:studio",
+    "proto:gen": "pnpm --filter @center/proto gen",
+    "proto:lint": "pnpm --filter @center/proto lint",
+    "test:integration": "pnpm --filter @center/api test:integration",
+    "admin:create": "pnpm --filter @center/api admin:create",
+    "docker:build": "docker compose --env-file .env.production -f docker-compose.prod.yml build",
+    "docker:up": "docker compose --env-file .env.production -f docker-compose.prod.yml up -d --build",
+    "docker:down": "docker compose --env-file .env.production -f docker-compose.prod.yml down",
+    "docker:logs": "docker compose --env-file .env.production -f docker-compose.prod.yml logs -f --tail=100",
+    "docker:admin": "docker compose --env-file .env.production -f docker-compose.prod.yml --profile tools run --rm admin"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.0",
+    "eslint": "^10.11.0",
+    "prettier": "^3.9.9",
+    "turbo": "^2.11.6",
+    "typescript": "~6.0.3",
+    "typescript-eslint": "^8.71.0"
+  }
+}

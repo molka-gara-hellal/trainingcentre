@@ -1,0 +1,135 @@
+# Pile complète : PostgreSQL + migrations + API gRPC + site web.
+#   docker compose --env-file .env.production -f docker-compose.prod.yml up -d --build
+# Réseaux : « backend » est INTERNE (aucun accès extérieur, ni entrant ni sortant) ; seul le site est publié,
+# et sur 127.0.0.1 : un reverse proxy HTTPS (Phase 12) se place devant. Le port gRPC n'est JAMAIS publié.
+name: training-center
+
+x-hardening: &hardening
+  restart: unless-stopped
+  security_opt: ["no-new-privileges:true"]
+  cap_drop: ["ALL"]
+  read_only: true
+  tmpfs: ["/tmp"]
+  logging:
+    driver: json-file
+    options: { max-size: "10m", max-file: "5" }
+
+services:
+  db:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-center}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD manquant dans .env.production}
+      POSTGRES_DB: ${POSTGRES_DB:-center}
+    volumes:
+      - center_db_data:/var/lib/postgresql/data
+    networks: [backend]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  migrate:
+    build: { context: ., dockerfile: docker/api.Dockerfile, target: migrate }
+    image: training-center-migrate
+    restart: "no"
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER:-center}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB:-center}
+    depends_on:
+      db: { condition: service_healthy }
+    # « edge » : accès sortant seul (aucun port publié), au cas où le moteur Prisma doive être téléchargé.
+    networks: [backend, edge]
+
+  api:
+    <<: *hardening
+    build: { context: ., dockerfile: docker/api.Dockerfile, target: runtime }
+    image: training-center-api
+    environment:
+      NODE_ENV: production
+      LOG_LEVEL: ${LOG_LEVEL:-info}
+      DATABASE_URL: postgresql://${POSTGRES_USER:-center}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB:-center}
+      JWT_ACCESS_SECRET: ${JWT_ACCESS_SECRET:?JWT_ACCESS_SECRET manquant (>= 32 caractères)}
+      ACCESS_TOKEN_TTL_MINUTES: ${ACCESS_TOKEN_TTL_MINUTES:-15}
+      REFRESH_TOKEN_TTL_DAYS: ${REFRESH_TOKEN_TTL_DAYS:-14}
+      SITE_URL: ${SITE_URL:?SITE_URL manquant (URL publique, ex. https://mon-domaine.tn)}
+      EMAIL_PROVIDER: ${EMAIL_PROVIDER:-none}
+      SMTP_HOST: ${SMTP_HOST:-}
+      SMTP_PORT: ${SMTP_PORT:-587}
+      SMTP_SECURE: ${SMTP_SECURE:-false}
+      SMTP_USER: ${SMTP_USER:-}
+      SMTP_PASSWORD: ${SMTP_PASSWORD:-}
+      EMAIL_FROM: ${EMAIL_FROM:-}
+      EMAIL_BRAND_NAME: ${EMAIL_BRAND_NAME:-}
+    depends_on:
+      migrate: { condition: service_completed_successfully }
+    expose: ["50051"]
+    networks: [backend]
+
+  web:
+    <<: *hardening
+    build:
+      context: .
+      dockerfile: docker/web.Dockerfile
+      args:
+        NEXT_PUBLIC_SITE_URL: ${SITE_URL:?SITE_URL manquant}
+    image: training-center-web
+    environment:
+      GRPC_API_URL: api:50051
+      NEXT_PUBLIC_SITE_URL: ${SITE_URL}
+      TRUSTED_PROXY_HOPS: ${TRUSTED_PROXY_HOPS:-0}
+    tmpfs: ["/tmp", "/app/apps/web/.next/cache"]
+    depends_on:
+      api: { condition: service_healthy }
+    ports:
+      - "127.0.0.1:${WEB_PORT:-3000}:3000"
+    networks: [backend, edge]
+
+  # HTTPS automatique (Let's Encrypt) : docker compose --profile https up -d
+  # Prérequis : DNS du domaine vers ce serveur, ports 80 et 443 ouverts, TRUSTED_PROXY_HOPS=1.
+  proxy:
+    profiles: ["https"]
+    image: caddy:2-alpine
+    restart: unless-stopped
+    security_opt: ["no-new-privileges:true"]
+    cap_drop: ["ALL"]
+    cap_add: ["NET_BIND_SERVICE"]
+    environment:
+      # Défaut « localhost » : l'interpolation est évaluée même si le profil https est inactif.
+      SITE_DOMAIN: ${SITE_DOMAIN:-localhost}
+    volumes:
+      - ./docker/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    depends_on:
+      web: { condition: service_healthy }
+    networks: [edge]
+
+  # Outil ponctuel (profil « tools ») : docker compose --profile tools run --rm admin
+  admin:
+    profiles: ["tools"]
+    image: training-center-migrate
+    working_dir: /repo/apps/api
+    command: ["./node_modules/.bin/tsx", "scripts/create-admin.ts"]
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER:-center}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB:-center}
+    stdin_open: true
+    tty: true
+    depends_on:
+      migrate: { condition: service_completed_successfully }
+    networks: [backend]
+
+networks:
+  backend:
+    internal: true
+  edge: {}
+
+volumes:
+  center_db_data:
+  caddy_data:
+  caddy_config:

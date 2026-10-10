@@ -1,0 +1,165 @@
+syntax = "proto3";
+
+package admin.v1;
+
+import "common/v1/common.proto";
+import "learning/v1/learning.proto";
+import "user/v1/user.proto";
+
+message StudentSummary {
+  string id = 1;
+  string user_id = 2;
+  string first_name = 3;
+  string last_name = 4;
+  string email = 5;
+  optional string phone = 6;
+  user.v1.UserStatus status = 7;
+  int32 enrollments_count = 8;
+}
+
+message TrainerSummary {
+  string id = 1;
+  string user_id = 2;
+  string first_name = 3;
+  string last_name = 4;
+  string email = 5;
+  // Absent tant que la biographie n'est pas fournie (rien n'est inventé).
+  optional string bio = 6;
+  repeated string specialties = 7;
+}
+
+message CourseDemand {
+  string course_slug = 1;
+  string course_title = 2;
+  int32 registrations_count = 3;
+}
+
+// Gestion transversale (rôle ADMIN). Phase 9.
+service AdminService {
+  rpc GetStats(GetStatsRequest) returns (GetStatsResponse);
+  rpc ListStudents(ListStudentsRequest) returns (ListStudentsResponse);
+  rpc SetStudentStatus(SetStudentStatusRequest) returns (SetStudentStatusResponse);
+  rpc ListTrainers(ListTrainersRequest) returns (ListTrainersResponse);
+  rpc CreateTrainer(CreateTrainerRequest) returns (CreateTrainerResponse);
+  rpc UpdateTrainer(UpdateTrainerRequest) returns (UpdateTrainerResponse);
+  rpc ListEnrollments(ListEnrollmentsRequest) returns (ListEnrollmentsResponse);
+  rpc UpdateEnrollment(UpdateEnrollmentRequest) returns (UpdateEnrollmentResponse);
+  rpc CreateProject(CreateProjectRequest) returns (CreateProjectResponse);
+  rpc IssueCertificate(IssueCertificateRequest) returns (IssueCertificateResponse);
+}
+
+message GetStatsRequest {
+  common.v1.Locale locale = 1;
+}
+
+message GetStatsResponse {
+  int32 students_count = 1;
+  int32 registrations_count = 2;
+  int32 pending_registrations_count = 3;
+  int32 active_courses_count = 4;
+  // Somme des paiements encaissés (PAID), en dinars tunisiens, 3 décimales.
+  string revenue_tnd = 5;
+  // Places occupées / capacité totale des sessions ouvertes, en pourcentage (0 à 100).
+  int32 fill_rate_pct = 6;
+  repeated CourseDemand most_requested_courses = 7;
+}
+
+message ListStudentsRequest {
+  optional string query = 1;
+  optional user.v1.UserStatus status = 2;
+  common.v1.PageRequest page = 3;
+}
+
+message ListStudentsResponse {
+  repeated StudentSummary students = 1;
+  common.v1.PageInfo page_info = 2;
+}
+
+message SetStudentStatusRequest {
+  string user_id = 1;
+  user.v1.UserStatus status = 2;
+}
+
+message SetStudentStatusResponse {
+  StudentSummary student = 1;
+}
+
+message ListTrainersRequest {}
+
+message ListTrainersResponse {
+  repeated TrainerSummary trainers = 1;
+}
+
+message CreateTrainerRequest {
+  string email = 1;
+  string first_name = 2;
+  string last_name = 3;
+  optional string bio = 4;
+  repeated string specialties = 5;
+}
+
+message CreateTrainerResponse {
+  TrainerSummary trainer = 1;
+}
+
+message UpdateTrainerRequest {
+  string id = 1;
+  string first_name = 2;
+  string last_name = 3;
+  optional string bio = 4;
+  repeated string specialties = 5;
+}
+
+message UpdateTrainerResponse {
+  TrainerSummary trainer = 1;
+}
+
+// Inscriptions d'une session (administration) : suivi de la progression, projets et attestations.
+message EnrollmentRow {
+  learning.v1.Enrollment enrollment = 1;
+  string first_name = 2;
+  string last_name = 3;
+  string email = 4;
+  int32 projects_count = 5;
+  // Code de l'attestation déjà émise, le cas échéant.
+  optional string certificate_code = 6;
+}
+
+message ListEnrollmentsRequest {
+  string session_id = 1;
+  common.v1.Locale locale = 2;
+}
+
+message ListEnrollmentsResponse {
+  repeated EnrollmentRow enrollments = 1;
+}
+
+// Au moins un champ à modifier. `progress_pct` entre 0 et 100.
+message UpdateEnrollmentRequest {
+  string id = 1;
+  optional learning.v1.EnrollmentStatus status = 2;
+  optional int32 progress_pct = 3;
+}
+
+message UpdateEnrollmentResponse {
+  learning.v1.Enrollment enrollment = 1;
+}
+
+message CreateProjectRequest {
+  string enrollment_id = 1;
+  string title = 2;
+  optional string description = 3;
+}
+
+message CreateProjectResponse {
+  learning.v1.Project project = 1;
+}
+
+// Émet l'attestation du centre (une seule par inscription) et notifie l'étudiant.
+message IssueCertificateRequest {
+  string enrollment_id = 1;
+}
+
+message IssueCertificateResponse {
+  learning.v1.Certificate certificate = 1;
+}

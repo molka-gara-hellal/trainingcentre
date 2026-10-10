@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+package user.v1;
+
+import "common/v1/common.proto";
+import "google/protobuf/timestamp.proto";
+
+enum UserStatus {
+  USER_STATUS_UNSPECIFIED = 0;
+  USER_STATUS_PENDING_ACTIVATION = 1;
+  USER_STATUS_ACTIVE = 2;
+  USER_STATUS_SUSPENDED = 3;
+}
+
+// Jamais de mot de passe ni de hash dans les messages.
+message User {
+  string id = 1;
+  string email = 2;
+  string first_name = 3;
+  string last_name = 4;
+  common.v1.Role role = 5;
+  common.v1.Locale locale = 6;
+  UserStatus status = 7;
+  google.protobuf.Timestamp created_at = 8;
+}
+
+// Profil de l'utilisateur connecté.
+service UserService {
+  rpc GetProfile(GetProfileRequest) returns (GetProfileResponse);
+  rpc UpdateProfile(UpdateProfileRequest) returns (UpdateProfileResponse);
+}
+
+message GetProfileRequest {}
+
+message GetProfileResponse {
+  User user = 1;
+  // Téléphone du profil étudiant (absent pour les autres rôles ou s'il n'est pas renseigné).
+  optional string phone = 2;
+}
+
+message UpdateProfileRequest {
+  string first_name = 1;
+  string last_name = 2;
+  common.v1.Locale locale = 3;
+  optional string phone = 4;
+}
+
+message UpdateProfileResponse {
+  User user = 1;
+}

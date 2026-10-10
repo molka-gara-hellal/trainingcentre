@@ -1,0 +1,16 @@
+version: v2
+clean: true
+plugins:
+  # Plugin lancé via `node` (et non via le shim .cmd de pnpm) pour fonctionner à l'identique sous Windows/Linux/macOS.
+  - local: ["node", "node_modules/ts-proto/protoc-gen-ts_proto"]
+    out: ../proto-gen/src
+    opt:
+      - outputServices=grpc-js
+      - esModuleInterop=true
+      - env=node
+      - stringEnums=true
+      - useOptionals=messages
+      - outputPartialMethods=true
+      - outputJsonMethods=false
+      - unrecognizedEnum=false
+      - forceLong=number

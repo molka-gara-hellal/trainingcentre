@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package site.v1;
+
+enum SettingStatus {
+  SETTING_STATUS_UNSPECIFIED = 0;
+  // Valeur pas encore décidée : l'interface affiche "À définir".
+  SETTING_STATUS_TODO = 1;
+  SETTING_STATUS_SET = 2;
+}
+
+message SiteSetting {
+  string key = 1;
+  string value = 2;
+  SettingStatus status = 3;
+}
+
+// Paramètres du site (nom du centre, coordonnées, réseaux sociaux...).
+// Tous les paramètres sont publics : ne JAMAIS y stocker de secret.
+service SiteService {
+  // Public — Phase 4 : implémenté
+  rpc GetPublicSettings(GetPublicSettingsRequest) returns (GetPublicSettingsResponse);
+  // Administration (rôle ADMIN) — Phase 9
+  rpc UpdateSetting(UpdateSettingRequest) returns (UpdateSettingResponse);
+}
+
+message GetPublicSettingsRequest {}
+
+message GetPublicSettingsResponse {
+  repeated SiteSetting settings = 1;
+}
+
+message UpdateSettingRequest {
+  string key = 1;
+  string value = 2;
+  SettingStatus status = 3;
+}
+
+message UpdateSettingResponse {
+  SiteSetting setting = 1;
+}

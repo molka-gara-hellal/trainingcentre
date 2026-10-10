@@ -1,0 +1,96 @@
+syntax = "proto3";
+
+package trainer.v1;
+
+import "common/v1/common.proto";
+import "course/v1/course.proto";
+import "learning/v1/learning.proto";
+
+// Espace formateur (rôle TRAINER). Limité aux sessions assignées au formateur connecté. Phase 8.
+service TrainerService {
+  rpc ListMySessions(ListMySessionsRequest) returns (ListMySessionsResponse);
+  rpc ListSessionStudents(ListSessionStudentsRequest) returns (ListSessionStudentsResponse);
+  rpc ListSessionSchedule(ListSessionScheduleRequest) returns (ListSessionScheduleResponse);
+  rpc GetEventAttendance(GetEventAttendanceRequest) returns (GetEventAttendanceResponse);
+  rpc MarkAttendance(MarkAttendanceRequest) returns (MarkAttendanceResponse);
+  rpc ListSessionProjects(ListSessionProjectsRequest) returns (ListSessionProjectsResponse);
+  rpc ReviewProject(ReviewProjectRequest) returns (ReviewProjectResponse);
+}
+
+message SessionStudent {
+  learning.v1.Enrollment enrollment = 1;
+  string first_name = 2;
+  string last_name = 3;
+  string email = 4;
+}
+
+message ListMySessionsRequest {
+  common.v1.PageRequest page = 1;
+  // Langue des titres de formation ; à défaut, la langue du profil.
+  common.v1.Locale locale = 2;
+}
+
+message ListMySessionsResponse {
+  repeated course.v1.CourseSession sessions = 1;
+  common.v1.PageInfo page_info = 2;
+}
+
+message ListSessionStudentsRequest {
+  string session_id = 1;
+  common.v1.Locale locale = 2;
+}
+
+message ListSessionStudentsResponse {
+  repeated SessionStudent students = 1;
+}
+
+message ListSessionScheduleRequest {
+  string session_id = 1;
+  common.v1.Locale locale = 2;
+}
+
+message ListSessionScheduleResponse {
+  repeated learning.v1.ScheduleEvent events = 1;
+}
+
+// Présences déjà saisies pour un cours de l'emploi du temps (absentes = pas encore saisies).
+message GetEventAttendanceRequest {
+  string schedule_event_id = 1;
+}
+
+message GetEventAttendanceResponse {
+  repeated learning.v1.AttendanceRecord records = 1;
+}
+
+message MarkAttendanceRequest {
+  string schedule_event_id = 1;
+  repeated learning.v1.AttendanceRecord records = 2;
+}
+
+message MarkAttendanceResponse {}
+
+message ListSessionProjectsRequest {
+  string session_id = 1;
+}
+
+// Un projet avec l'étudiant concerné.
+message SessionProject {
+  learning.v1.Project project = 1;
+  string first_name = 2;
+  string last_name = 3;
+}
+
+message ListSessionProjectsResponse {
+  repeated SessionProject projects = 1;
+}
+
+message ReviewProjectRequest {
+  string project_id = 1;
+  learning.v1.ProjectStatus status = 2;
+  optional string feedback = 3;
+  optional string grade = 4;
+}
+
+message ReviewProjectResponse {
+  learning.v1.Project project = 1;
+}
