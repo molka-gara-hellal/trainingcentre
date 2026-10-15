@@ -72,6 +72,27 @@
         "text": "Préparer un stage, un emploi ou la suite de ses études."
       }
     ],
+    "certifTitle": "Vers une certification internationale",
+    "certifLead": "Un parcours en quatre étapes pour préparer des certifications reconnues, comme celles de Microsoft, AWS, Certiport ou Pearson VUE.",
+    "certifSteps": [
+      {
+        "name": "Préparation certificat international",
+        "text": "Suivre le programme de la certification visée, avec des exercices guidés."
+      },
+      {
+        "name": "Examen blanc",
+        "text": "S'entraîner en conditions réelles pour repérer ses points faibles."
+      },
+      {
+        "name": "Examen final",
+        "text": "Passer l'examen officiel, selon les modalités de l'organisme certificateur."
+      },
+      {
+        "name": "Certificat international",
+        "text": "Obtenir un certificat reconnu, à valoriser dans son CV et son portfolio."
+      }
+    ],
+    "certifNote": "Les certifications proposées seront annoncées après confirmation.",
     "coursesTitle": "Les formations",
     "allCourses": "Voir toutes les formations",
     "coursesEmpty": "Les formations seront publiées prochainement. Écrivez-nous pour être informé de l'ouverture des inscriptions.",

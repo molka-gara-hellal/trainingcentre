@@ -72,6 +72,27 @@
         "text": "Prepare an internship, a job or further studies."
       }
     ],
+    "certifTitle": "Towards an international certification",
+    "certifLead": "A four-step path to prepare for recognised certifications, such as those from Microsoft, AWS, Certiport or Pearson VUE.",
+    "certifSteps": [
+      {
+        "name": "International certification preparation",
+        "text": "Follow the programme of the target certification, with guided exercises."
+      },
+      {
+        "name": "Mock exam",
+        "text": "Practise in real conditions to spot your weak points."
+      },
+      {
+        "name": "Final exam",
+        "text": "Take the official exam, following the certifying body's procedure."
+      },
+      {
+        "name": "International certificate",
+        "text": "Earn a recognised certificate to showcase on your CV and portfolio."
+      }
+    ],
+    "certifNote": "The certifications offered will be announced once confirmed.",
     "coursesTitle": "Courses",
     "allCourses": "See all courses",
     "coursesEmpty": "Courses will be published soon. Write to us to be told when registration opens.",

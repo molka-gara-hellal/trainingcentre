@@ -26,6 +26,7 @@ export default async function HomePage({ params }: Props) {
     getSettings(),
   ]);
   const stages = t.raw("stages") as { name: string; text: string }[];
+  const certifSteps = t.raw("certifSteps") as { name: string; text: string }[];
   const audiences = t.raw("audiences") as { title: string; text: string }[];
   const projectName = settings["PROJECT_NAME"];
 
@@ -121,6 +122,25 @@ export default async function HomePage({ params }: Props) {
             {t("pfeLink")}
           </Link>
         </p>
+      </Section>
+
+      <Section title={t("certifTitle")} id="certification">
+        <p className="-mt-4 mb-10 max-w-2xl text-muted">{t("certifLead")}</p>
+        <ol className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4" aria-label={t("certifTitle")}>
+          {certifSteps.map((step, index) => (
+            <li key={step.name} className="space-y-3 border-t-2 border-primary pt-4">
+              <span
+                aria-hidden="true"
+                className="flex size-[1.9rem] items-center justify-center rounded-full border-2 border-primary bg-surface text-sm font-semibold text-primary"
+              >
+                {index + 1}
+              </span>
+              <p className="font-semibold">{step.name}</p>
+              <p className="text-sm text-muted">{step.text}</p>
+            </li>
+          ))}
+        </ol>
+        <p className="mt-8 text-sm text-muted">{t("certifNote")}</p>
       </Section>
 
       {faqs.length > 0 && (
